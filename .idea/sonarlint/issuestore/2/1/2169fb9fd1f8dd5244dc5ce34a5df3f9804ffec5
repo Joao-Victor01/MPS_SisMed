@@ -1,0 +1,8 @@
+
+t	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ýÒ†›ÿÿÿÿÿ
+@
+java:S1165"*Make this "pacienteExistente" field final.(°£ÍÆ
+I
+java:S1948"3Make "pacienteExistente" transient or serializable.(°£ÍÆ
+M
+java:S1128"2Remove this unused import 'SisMed.model.Usuarios'.(³ü¬Úýÿÿÿÿ
