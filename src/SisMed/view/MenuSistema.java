@@ -57,25 +57,58 @@ public class MenuSistema {
     }
 
     private void cadastrarPaciente() {
-        System.out.print("Nome: ");
-        String nome = scanner.nextLine();
+        System.out.println("Escolha uma opção:\n");
+        System.out.println("\t1.Cadastrar localmente;\n\t2.Cadastrar no Banco de Dados;\n");
 
-        System.out.print("CPF: ");
-        Long cpf = scanner.nextLong();
+        int opcao = scanner.nextInt();
         scanner.nextLine();
 
-        System.out.print("Endereço: ");
-        String endereco = scanner.nextLine();
+        if(opcao == 1){
+            System.out.println("Opção escolhida: cadastro local!\nPreencha os campos a seguir:\n");
+            System.out.print("Nome: ");
+            String nome = scanner.nextLine();
 
-        System.out.print("Sexo: ");
-        String sexo = scanner.nextLine();
+            System.out.print("CPF: ");
+            Long cpf = scanner.nextLong();
+            scanner.nextLine();
 
-        System.out.print("Data de Nascimento (yyyy-MM-dd): ");
-        LocalDate dataNascimento = LocalDate.parse(scanner.nextLine());
+            System.out.print("Endereço: ");
+            String endereco = scanner.nextLine();
 
-        pacientesController.cadastrarPaciente(nome, cpf, endereco, sexo, dataNascimento);
+            System.out.print("Sexo: ");
+            String sexo = scanner.nextLine();
 
-        System.out.println("Paciente cadastrado com sucesso!");
+            System.out.print("Data de Nascimento (yyyy-MM-dd): ");
+            LocalDate dataNascimento = LocalDate.parse(scanner.nextLine());
+
+            pacientesController.cadastrarPaciente(nome, cpf, endereco, sexo, dataNascimento);
+
+            System.out.println("Paciente cadastrado com sucesso!");
+        } else if (opcao == 2) {
+            System.out.println("Opção escolhida: cadastro na base de dados!\nPreencha os campos a seguir:\n");
+            System.out.print("Nome: ");
+            String nome = scanner.nextLine();
+
+            System.out.print("CPF: ");
+            Long cpf = scanner.nextLong();
+            scanner.nextLine();
+
+            System.out.print("Endereço: ");
+            String endereco = scanner.nextLine();
+
+            System.out.print("Sexo: ");
+            String sexo = scanner.nextLine();
+
+            System.out.print("Data de Nascimento (yyyy-MM-dd): ");
+            LocalDate dataNascimento = LocalDate.parse(scanner.nextLine());
+
+            pacientesController.cadastrarPacienteDb(nome, cpf, endereco, sexo, dataNascimento);
+
+            System.out.println("Paciente cadastrado com sucesso!");
+
+        }
+
+
     }
 
     private void cadastrarMedico() {

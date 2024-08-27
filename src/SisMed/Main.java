@@ -4,6 +4,7 @@ import SisMed.controller.AdminsController;
 import SisMed.controller.MedicosController;
 import SisMed.controller.PacientesController;
 import SisMed.repository.AdminsRepository;
+import SisMed.repository.H2Database;
 import SisMed.repository.MedicosRepository;
 import SisMed.repository.PacientesRepository;
 import SisMed.service.AdminsService;
@@ -11,21 +12,39 @@ import SisMed.service.MedicosService;
 import SisMed.service.PacientesService;
 import SisMed.view.MenuSistema;
 
+import java.sql.Connection;
+import java.sql.SQLException;
+
 public class Main {
-    public static void main(String[] args) {
-        PacientesRepository pacientesRepository = new PacientesRepository();
-        PacientesService pacientesService = new PacientesService(pacientesRepository);
-        PacientesController pacientesController = new PacientesController(pacientesService);
 
-        MedicosRepository medicosRepository = new MedicosRepository();
-        MedicosService medicosService = new MedicosService(medicosRepository);
-        MedicosController medicosController = new MedicosController(medicosService);
+        public static void main(String[] args) {
+            // Conectar ao banco de dados
+            H2Database db = new H2Database();
+            db.connect();
+            Connection connection = db.getConnection();
+            db.criarTabelaPacientes();
 
-        AdminsRepository adminsRepository = new AdminsRepository();
-        AdminsService adminsService = new AdminsService(adminsRepository);
-        AdminsController adminsController = new AdminsController(adminsService);
+            // Criar repositórios
+            PacientesRepository pacientesRepository = new PacientesRepository();
+            MedicosRepository medicosRepository = new MedicosRepository();
+            AdminsRepository adminsRepository = new AdminsRepository();
 
-        MenuSistema menu = new MenuSistema(pacientesController, medicosController, adminsController);
-        menu.exibirMenu();
-    }
+            // Criar serviços
+            PacientesService pacientesService = new PacientesService(pacientesRepository, connection, db);
+            MedicosService medicosService = new MedicosService(medicosRepository);
+            AdminsService adminsService = new AdminsService(adminsRepository);
+
+            // Criar controladores
+            PacientesController pacientesController = new PacientesController(pacientesService);
+            MedicosController medicosController = new MedicosController(medicosService);
+            AdminsController adminsController = new AdminsController(adminsService);
+
+            // Exibir o menu
+            MenuSistema menu = new MenuSistema(pacientesController, medicosController, adminsController);
+            menu.exibirMenu();
+
+            // Desconectar do banco de dados
+
+            db.disconnect();
+        }
 }
