@@ -3,22 +3,18 @@ package SisMed.view;
 import SisMed.controller.AdminsController;
 import SisMed.controller.MedicosController;
 import SisMed.controller.PacientesController;
+import SisMed.utils.MenuChoices;
 
 import java.time.LocalDate;
 import java.util.Scanner;
 
 public class MenuSistema {
 
-    private PacientesController pacientesController;
-    private MedicosController medicosController;
-
-    private AdminsController adminsController;
+    private MenuChoices menuChoices;
     private Scanner scanner = new Scanner(System.in);
 
-    public MenuSistema(PacientesController pacientesController, MedicosController medicosController, AdminsController adminsController) {
-        this.pacientesController = pacientesController;
-        this.medicosController = medicosController;
-        this.adminsController = adminsController;
+    public MenuSistema(MenuChoices menuChoices) {
+        this.menuChoices = menuChoices;
     }
 
     public void exibirMenu() {
@@ -36,16 +32,16 @@ public class MenuSistema {
 
             switch (opcao) {
                 case 1:
-                    cadastrarPaciente();
+                    menuChoices.cadastrarPaciente();
                     break;
                 case 2:
-                    cadastrarMedico();
+                    menuChoices.cadastrarMedico();
                     break;
                 case 3:
-                    cadastrarAdmin();
+                    menuChoices.cadastrarAdmin();
                     break;
                 case 4:
-                    listarUsuarios();
+                    menuChoices.listarUsuarios();
                     break;
                 case 5:
                     System.out.println("Saindo do sistema.");
@@ -56,124 +52,5 @@ public class MenuSistema {
         }
     }
 
-    private void cadastrarPaciente() {
-        System.out.println("Escolha uma opção:\n");
-        System.out.println("\t1.Cadastrar localmente;\n\t2.Cadastrar no Banco de Dados;\n");
 
-        int opcao = scanner.nextInt();
-        scanner.nextLine();
-
-        if(opcao == 1){
-            System.out.println("Opção escolhida: cadastro local!\nPreencha os campos a seguir:\n");
-            System.out.print("Nome: ");
-            String nome = scanner.nextLine();
-
-            System.out.print("CPF: ");
-            Long cpf = scanner.nextLong();
-            scanner.nextLine();
-
-            System.out.print("Endereço: ");
-            String endereco = scanner.nextLine();
-
-            System.out.print("Sexo: ");
-            String sexo = scanner.nextLine();
-
-            System.out.print("Data de Nascimento (yyyy-MM-dd): ");
-            LocalDate dataNascimento = LocalDate.parse(scanner.nextLine());
-
-            pacientesController.cadastrarPaciente(nome, cpf, endereco, sexo, dataNascimento);
-
-            System.out.println("Paciente cadastrado com sucesso!");
-        } else if (opcao == 2) {
-            System.out.println("Opção escolhida: cadastro na base de dados!\nPreencha os campos a seguir:\n");
-            System.out.print("Nome: ");
-            String nome = scanner.nextLine();
-
-            System.out.print("CPF: ");
-            Long cpf = scanner.nextLong();
-            scanner.nextLine();
-
-            System.out.print("Endereço: ");
-            String endereco = scanner.nextLine();
-
-            System.out.print("Sexo: ");
-            String sexo = scanner.nextLine();
-
-            System.out.print("Data de Nascimento (yyyy-MM-dd): ");
-            LocalDate dataNascimento = LocalDate.parse(scanner.nextLine());
-
-            pacientesController.cadastrarPacienteDb(nome, cpf, endereco, sexo, dataNascimento);
-
-            System.out.println("Paciente cadastrado com sucesso!");
-
-        }
-
-
-    }
-
-    private void cadastrarMedico() {
-        System.out.print("Nome: ");
-        String nome = scanner.nextLine();
-
-        System.out.print("CPF: ");
-        Long cpf = scanner.nextLong();
-        scanner.nextLine();
-
-        System.out.print("CRM: ");
-        String crm = scanner.nextLine();
-
-        System.out.print("Especializações: ");
-        String especializacoes = scanner.nextLine();
-
-        System.out.print("Endereço: ");
-        String endereco = scanner.nextLine();
-
-        System.out.print("Sexo: ");
-        String sexo = scanner.nextLine();
-
-        System.out.print("Data de Nascimento (yyyy-MM-dd): ");
-        LocalDate dataNascimento = LocalDate.parse(scanner.nextLine());
-
-        medicosController.cadastrarMedico(nome,cpf, crm,
-                especializacoes, endereco, sexo, dataNascimento);
-
-        System.out.println("Médico cadastrado com sucesso!");
-    }
-
-    private void cadastrarAdmin() {
-        System.out.print("Nome: ");
-        String nome = scanner.nextLine();
-
-        System.out.print("CPF: ");
-        Long cpf = scanner.nextLong();
-        scanner.nextLine();
-
-        System.out.print("Endereço: ");
-        String endereco = scanner.nextLine();
-
-        System.out.print("Sexo: ");
-        String sexo = scanner.nextLine();
-
-        System.out.print("Data de Nascimento (yyyy-MM-dd): ");
-        LocalDate dataNascimento = LocalDate.parse(scanner.nextLine());
-
-        adminsController.cadastrarAdmin(nome, cpf, endereco, sexo, dataNascimento);
-
-        System.out.println("Administrador cadastrado com sucesso!");
-    }
-    public void listarUsuarios(){
-
-        System.out.println("Pacientes cadastrados: \n");
-        pacientesController.listarPacientes();
-        System.out.println("---------------------- \n");
-
-        System.out.println("Médicos cadastrados: \n");
-        medicosController.listarMedicos();
-        System.out.println("---------------------- \n");
-
-        System.out.println("Administradores cadastrados: \n");
-        adminsController.listarAdmins();
-        System.out.println("---------------------- \n");
-
-    }
 }

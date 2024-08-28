@@ -56,7 +56,7 @@ public class PacientesController {
             novoPaciente.setEndereco(endereco);
             novoPaciente.setDataNascimento(dataNascimento);
 
-            pacientesService.inserirPaciente(novoPaciente);
+            pacientesService.cadastrarPacienteDb(novoPaciente);
         } catch (PacienteExistenteException e) {
             Pacientes pacienteExistente = e.getPacienteExistente();
             System.err.println("Erro: " + e.getMessage());
@@ -78,8 +78,8 @@ public class PacientesController {
     }
 
     public void listarPacientes() {
-        List<Pacientes> listaPacientes = pacientesService.listarPacientes(); // Localmente
-        System.out.println("-------------- Pacientes armazenados localmente: ");
+        List<Pacientes> listaPacientes = pacientesService.listarPacientes();
+        System.out.println("---- Pacientes armazenados localmente: ----");
         for (Pacientes paciente : listaPacientes) {
             System.out.println("Nome: " + paciente.getNome());
             System.out.println("CPF: " + paciente.getCpf());
@@ -89,8 +89,8 @@ public class PacientesController {
             System.out.println("-----------------------------------");
         }
 
-        List<Pacientes> listaPacientesDb = pacientesService.listarPacientesDb(); // Do banco de dados
-        System.out.println("-------------- Pacientes da base de dados: ");
+        List<Pacientes> listaPacientesDb = pacientesService.listarPacientesDb();
+        System.out.println("---- Pacientes da base de dados: ---- ");
         for (Pacientes paciente : listaPacientesDb) {
             System.out.println("Nome: " + paciente.getNome());
             System.out.println("CPF: " + paciente.getCpf());

@@ -1,9 +1,8 @@
 package SisMed.controller;
 
-import SisMed.exception.AdminExistenteException;
-import SisMed.exception.DadosAdminInvalidosException;
-import SisMed.exception.ErroCadastroAdminException;
+import SisMed.exception.*;
 import SisMed.model.Admins;
+import SisMed.model.Pacientes;
 import SisMed.service.AdminsService;
 
 import java.time.LocalDate;
@@ -45,18 +44,58 @@ public class AdminsController {
             e.printStackTrace();
         }
     }
+    public void cadastrarAdminDb (String nome, Long cpf, String endereco, String sexo, LocalDate dataNascimento){
+        try {
+            Admins novoAdmin = new Admins();
+            novoAdmin.setNome(nome);
+            novoAdmin.setCpf(cpf);
+            novoAdmin.setSexo(sexo);
+            novoAdmin.setEndereco(endereco);
+            novoAdmin.setDataNascimento(dataNascimento);
+
+            adminsService.cadastrarAdminDb(novoAdmin);
+        } catch (AdminExistenteException e) {
+            Admins adminExistente = e.getAdminExistente();
+            System.err.println("Erro: " + e.getMessage());
+            System.err.println("Dados do paciente já cadastrado:");
+            System.err.println("Nome: " + adminExistente.getNome());
+            System.err.println("CPF: " + adminExistente.getCpf());
+
+        } catch (DadosAdminInvalidosException e) {
+            System.err.println("Erro: Dados inválidos. " + e.getMessage());
+
+        } catch (ErroCadastroAdminException e) {
+            System.err.println("Erro ao cadastrar administrador. " + e.getMessage());
+            e.printStackTrace();
+
+        } catch (Exception e) {
+            System.err.println("Erro inesperado: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
 
     public void listarAdmins() {
         List<Admins> listaAdmins = adminsService.listarAdmins();
+        System.out.println("---- Administradores armazenados localmente: ----");
+        for (Admins admin : listaAdmins) {
+            System.out.println("Nome: " + admin.getNome());
+            System.out.println("CPF: " + admin.getCpf());
+            System.out.println("Endereço: " + admin.getEndereco());
+            System.out.println("Sexo: " + admin.getSexo());
+            System.out.println("Data de Nascimento: " + admin.getDataNascimento());
+            System.out.println("-----------------------------------");
+        }
 
-            for (Admins admin : listaAdmins) {
-                System.out.println("Nome: " + admin.getNome());
-                System.out.println("CPF: " + admin.getCpf());
-                System.out.println("Endereço: " + admin.getEndereco());
-                System.out.println("Sexo: " + admin.getSexo());
-                System.out.println("Data de Nascimento: " + admin.getDataNascimento());
-                System.out.println("-----------------------------------");
-            }
+        List<Admins> listaAdminsDb = adminsService.listarAdminsDb();
+        System.out.println("---- Administradores da base de dados: ---- ");
+        for (Admins admin : listaAdminsDb) {
+            System.out.println("Nome: " + admin.getNome());
+            System.out.println("CPF: " + admin.getCpf());
+            System.out.println("Endereço: " + admin.getEndereco());
+            System.out.println("Sexo: " + admin.getSexo());
+            System.out.println("Data de Nascimento: " + admin.getDataNascimento());
+            System.out.println("-----------------------------------");
+        }
     }
 
 }

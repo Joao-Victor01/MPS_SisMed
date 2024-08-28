@@ -14,15 +14,12 @@ import java.util.List;
 public class PacientesService {
     private PacientesRepository pacientesRepository;
     private Connection connection;
-    private H2Database database;
 
-    public PacientesService(PacientesRepository pacientesRepository, Connection connection, H2Database database){
+    public PacientesService(PacientesRepository pacientesRepository, Connection connection){
         this.pacientesRepository = pacientesRepository;
         this.connection = connection;
-        this.database = database;
     }
 
-    //inserir paciente em variável local
     public void cadastrarPaciente (Pacientes paciente){
         try {
             Pacientes pacienteExistente = pacientesRepository.buscarPorCpf(paciente.getCpf()).orElse(null);
@@ -41,12 +38,11 @@ public class PacientesService {
     }
 
     public List<Pacientes> listarPacientes() {
-        return pacientesRepository.listarTodos();  // Localmente
+        return pacientesRepository.listarTodos();
     }
 
 
-    //inserir paciente no banco de dados
-    public void inserirPaciente(Pacientes paciente) {
+    public void cadastrarPacienteDb(Pacientes paciente) {
         final String sql = "INSERT INTO Pacientes (nome, cpf, endereco, sexo, dataNascimento) VALUES (?, ?, ?, ?, ?)";
 
         try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
