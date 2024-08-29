@@ -25,6 +25,8 @@ public class PacientesController {
             novoPaciente.setSexo(sexo);
             novoPaciente.setEndereco(endereco);
             novoPaciente.setDataNascimento(dataNascimento);
+            novoPaciente.setLogin(login);
+            novoPaciente.setSenha(senha);
 
             pacientesService.cadastrarPaciente(novoPaciente);
         } catch (PacienteExistenteException e) {
