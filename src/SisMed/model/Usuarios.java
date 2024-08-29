@@ -56,7 +56,7 @@ public class Usuarios {
         return login;
     }
 
-    public void setLogin(String login) {
+    public void createLogin(String login) {
         if (login == null || login.isEmpty()) {
             throw new IllegalArgumentException("Login não pode ser vazio.");
         }
@@ -69,6 +69,9 @@ public class Usuarios {
         this.login = login;
     }
 
+    public String getSenha() {
+        return senha;
+    }
 
   
 }
