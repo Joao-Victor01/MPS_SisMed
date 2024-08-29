@@ -56,6 +56,19 @@ public class Usuarios {
         return login;
     }
 
+    public void setLogin(String login) {
+        if (login == null || login.isEmpty()) {
+            throw new IllegalArgumentException("Login não pode ser vazio.");
+        }
+        if (login.length() > 12) {
+            throw new IllegalArgumentException("Login não pode ter mais que 12 caracteres.");
+        }
+        if (login.matches(".*\\d.*")) {
+            throw new IllegalArgumentException("Login não pode conter números.");
+        }
+        this.login = login;
+    }
+
 
   
 }
