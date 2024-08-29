@@ -17,7 +17,7 @@ public class PacientesController {
         this.pacientesService = pacienteService;
     }
 
-    public void cadastrarPaciente(String nome, Long cpf, String endereco, String sexo, LocalDate dataNascimento){
+    public void cadastrarPaciente(String nome, Long cpf, String endereco, String sexo, LocalDate dataNascimento, String login, String senha){
         try {
             Pacientes novoPaciente = new Pacientes();
             novoPaciente.setNome(nome);

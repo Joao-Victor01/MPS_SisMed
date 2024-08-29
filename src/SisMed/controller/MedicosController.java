@@ -17,7 +17,7 @@ public class MedicosController {
     }
 
     public void cadastrarMedico(String nome, Long cpf, String crm, String especializacoes,
-                                String endereco, String sexo, LocalDate dataNascimento){
+                                String endereco, String sexo, LocalDate dataNascimento,  String login, String senha){
         try {
             Medicos novoMedico = new Medicos();
             novoMedico.setNome(nome);
@@ -27,8 +27,8 @@ public class MedicosController {
             novoMedico.setDataNascimento(dataNascimento);
             novoMedico.setCrm(crm);
             novoMedico.setEspecializacoes(especializacoes);
-            novoPaciente.setLogin(login);
-            novoPaciente.setSenha(senha);
+            novoMedico.setLogin(login);
+            novoMedico.setSenha(senha);
 
             medicosService.cadastrarMedico(novoMedico);
         } catch (MedicoExistenteException e) {
