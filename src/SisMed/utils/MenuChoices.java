@@ -46,7 +46,13 @@ public class MenuChoices {
             System.out.print("Data de Nascimento (yyyy-MM-dd): ");
             LocalDate dataNascimento = LocalDate.parse(scanner.nextLine());
 
-            pacientesController.cadastrarPaciente(nome, cpf, endereco, sexo, dataNascimento);
+            System.out.print("Login: ");
+            String login = scanner.nextLine();
+
+            System.out.print("Senha: ");
+            String senha = scanner.nextLine();
+
+            pacientesController.cadastrarPaciente(nome, cpf, endereco, sexo, dataNascimento, login, senha);
 
             System.out.println("Paciente cadastrado com sucesso!");
         } else if (opcao == 2) {
@@ -67,7 +73,13 @@ public class MenuChoices {
             System.out.print("Data de Nascimento (yyyy-MM-dd): ");
             LocalDate dataNascimento = LocalDate.parse(scanner.nextLine());
 
-            pacientesController.cadastrarPacienteDb(nome, cpf, endereco, sexo, dataNascimento);
+            System.out.print("Login: ");
+            String login = scanner.nextLine();
+
+            System.out.print("Senha: ");
+            String senha = scanner.nextLine();
+
+            pacientesController.cadastrarPacienteDb(nome, cpf, endereco, sexo, dataNascimento, login, senha);
 
             System.out.println("Paciente cadastrado com sucesso!");
 
@@ -110,7 +122,13 @@ public class MenuChoices {
             System.out.print("Especializações: ");
             String especializacoes = scanner.nextLine();
 
-            medicosController.cadastrarMedico(nome, cpf, crm, especializacoes, endereco, sexo, dataNascimento);
+            System.out.print("Login: ");
+            String login = scanner.nextLine();
+
+            System.out.print("Senha: ");
+            String senha = scanner.nextLine();
+
+            medicosController.cadastrarMedico(nome, cpf, crm, especializacoes, endereco, sexo, dataNascimento, login, senha);
 
                 System.out.println("Médico cadastrado com sucesso!");
         } else if (opcao == 2) {
@@ -138,7 +156,13 @@ public class MenuChoices {
             System.out.print("Especializações: ");
             String especializacoes = scanner.nextLine();
 
-            medicosController.cadastrarMedicoDb(nome,cpf, crm, endereco, sexo, dataNascimento, especializacoes);
+            System.out.print("Login: ");
+            String login = scanner.nextLine();
+
+            System.out.print("Senha: ");
+            String senha = scanner.nextLine();
+
+            medicosController.cadastrarMedicoDb(nome,cpf, crm, endereco, sexo, dataNascimento, especializacoes, login, senha);
 
             System.out.println("Médico cadastrado com sucesso!");
 

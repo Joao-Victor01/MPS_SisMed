@@ -15,7 +15,7 @@ public class AdminsController {
         this.adminsService = adminsService;
     }
 
-    public void cadastrarAdmin(String nome, Long cpf, String endereco, String sexo, LocalDate dataNascimento){
+    public void cadastrarAdmin(String nome, Long cpf, String endereco, String sexo, LocalDate dataNascimento, String login, String senha){
         try {
             Admins novoAdmin = new Admins();
             novoAdmin.setNome(nome);
@@ -23,8 +23,8 @@ public class AdminsController {
             novoAdmin.setSexo(sexo);
             novoAdmin.setEndereco(endereco);
             novoAdmin.setDataNascimento(dataNascimento);
-            novoPaciente.setLogin(login);
-            novoPaciente.setSenha(senha);
+            novoAdmin.setLogin(login);
+            novoAdmin.setSenha(senha);
 
             adminsService.cadastrarAdmin(novoAdmin);
         } catch (AdminExistenteException e) {
