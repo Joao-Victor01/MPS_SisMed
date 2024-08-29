@@ -27,6 +27,8 @@ public class MedicosController {
             novoMedico.setDataNascimento(dataNascimento);
             novoMedico.setCrm(crm);
             novoMedico.setEspecializacoes(especializacoes);
+            novoPaciente.setLogin(login);
+            novoPaciente.setSenha(senha);
 
             medicosService.cadastrarMedico(novoMedico);
         } catch (MedicoExistenteException e) {
