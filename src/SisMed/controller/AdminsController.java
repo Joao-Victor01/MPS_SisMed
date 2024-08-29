@@ -23,6 +23,8 @@ public class AdminsController {
             novoAdmin.setSexo(sexo);
             novoAdmin.setEndereco(endereco);
             novoAdmin.setDataNascimento(dataNascimento);
+            novoPaciente.setLogin(login);
+            novoPaciente.setSenha(senha);
 
             adminsService.cadastrarAdmin(novoAdmin);
         } catch (AdminExistenteException e) {
