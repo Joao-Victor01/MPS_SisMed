@@ -78,7 +78,7 @@ Abaixo está o diagrama de classe do sistema, que ilustra a estrutura das princi
 2. **Navegue até o Diretório do Projeto**
 
    ```bash
-   cd seu_repositorio
+   cd src/SisMed
    ```
 
 3. **Compile o Projeto**
