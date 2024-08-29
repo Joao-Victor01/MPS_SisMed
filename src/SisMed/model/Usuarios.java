@@ -7,9 +7,11 @@ public class Usuarios {
     private Long cpf;
     private String endereco;
     private String sexo;
-
     private LocalDate dataNascimento;
+    private String login;
+    private String senha;
 
+    // Getters e Setters
     public String getNome() {
         return nome;
     }
@@ -49,4 +51,11 @@ public class Usuarios {
     public void setDataNascimento(LocalDate dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
+
+    public String getLogin() {
+        return login;
+    }
+
+
+  
 }
