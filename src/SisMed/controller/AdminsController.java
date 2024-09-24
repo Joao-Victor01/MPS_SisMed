@@ -46,7 +46,7 @@ public class AdminsController {
             e.printStackTrace();
         }
     }
-    public void cadastrarAdminDb (String nome, Long cpf, String endereco, String sexo, LocalDate dataNascimento){
+    public void cadastrarAdminDb(String nome, Long cpf, String endereco, String sexo, LocalDate dataNascimento, String login, String senha){
         try {
             Admins novoAdmin = new Admins();
             novoAdmin.setNome(nome);
@@ -54,12 +54,14 @@ public class AdminsController {
             novoAdmin.setSexo(sexo);
             novoAdmin.setEndereco(endereco);
             novoAdmin.setDataNascimento(dataNascimento);
+            novoAdmin.setLogin(login);
+            novoAdmin.setSenha(senha);
 
             adminsService.cadastrarAdminDb(novoAdmin);
         } catch (AdminExistenteException e) {
             Admins adminExistente = e.getAdminExistente();
             System.err.println("Erro: " + e.getMessage());
-            System.err.println("Dados do paciente já cadastrado:");
+            System.err.println("Dados do Administrador já cadastrado:");
             System.err.println("Nome: " + adminExistente.getNome());
             System.err.println("CPF: " + adminExistente.getCpf());
 
@@ -67,7 +69,7 @@ public class AdminsController {
             System.err.println("Erro: Dados inválidos. " + e.getMessage());
 
         } catch (ErroCadastroAdminException e) {
-            System.err.println("Erro ao cadastrar administrador. " + e.getMessage());
+            System.err.println("Erro ao cadastrar Administrador. " + e.getMessage());
             e.printStackTrace();
 
         } catch (Exception e) {
@@ -75,7 +77,6 @@ public class AdminsController {
             e.printStackTrace();
         }
     }
-
     public void listarAdmins() {
         List<Admins> listaAdmins = adminsService.listarAdmins();
         System.out.println("---- Administradores armazenados localmente: ----");

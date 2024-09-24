@@ -49,7 +49,7 @@ public class PacientesController {
         }
     }
 
-    public void cadastrarPacienteDb (String nome, Long cpf, String endereco, String sexo, LocalDate dataNascimento){
+    public void cadastrarPacienteDb(String nome, Long cpf, String endereco, String sexo, LocalDate dataNascimento, String login, String senha){
         try {
             Pacientes novoPaciente = new Pacientes();
             novoPaciente.setNome(nome);
@@ -57,6 +57,8 @@ public class PacientesController {
             novoPaciente.setSexo(sexo);
             novoPaciente.setEndereco(endereco);
             novoPaciente.setDataNascimento(dataNascimento);
+            novoPaciente.setLogin(login);
+            novoPaciente.setSenha(senha);
 
             pacientesService.cadastrarPacienteDb(novoPaciente);
         } catch (PacienteExistenteException e) {
@@ -78,6 +80,7 @@ public class PacientesController {
             e.printStackTrace();
         }
     }
+
 
     public void listarPacientes() {
         List<Pacientes> listaPacientes = pacientesService.listarPacientes();

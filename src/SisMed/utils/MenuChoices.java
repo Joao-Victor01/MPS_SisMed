@@ -162,7 +162,7 @@ public class MenuChoices {
             System.out.print("Senha: ");
             String senha = scanner.nextLine();
 
-            medicosController.cadastrarMedicoDb(nome,cpf, crm, endereco, sexo, dataNascimento, especializacoes, login, senha);
+            medicosController.cadastrarMedicoDb(nome, cpf, crm, especializacoes, endereco, sexo, dataNascimento, login, senha);
 
             System.out.println("Médico cadastrado com sucesso!");
 
@@ -198,8 +198,14 @@ public class MenuChoices {
             System.out.print("Data de Nascimento (yyyy-MM-dd): ");
             LocalDate dataNascimento = LocalDate.parse(scanner.nextLine());
 
+            System.out.print("Login: ");
+            String login = scanner.nextLine();
 
-            adminsController.cadastrarAdmin(nome, cpf, endereco, sexo, dataNascimento);
+            System.out.print("Senha: ");
+            String senha = scanner.nextLine();
+
+
+            adminsController.cadastrarAdmin(nome, cpf, endereco, sexo, dataNascimento, login, senha);
 
             System.out.println("Administrador cadastrado com sucesso!");
         } else if (opcao == 2) {
@@ -221,7 +227,13 @@ public class MenuChoices {
             System.out.print("Data de Nascimento (yyyy-MM-dd): ");
             LocalDate dataNascimento = LocalDate.parse(scanner.nextLine());
 
-            adminsController.cadastrarAdminDb(nome,cpf, endereco, sexo, dataNascimento);
+            System.out.print("Login: ");
+            String login = scanner.nextLine();
+
+            System.out.print("Senha: ");
+            String senha = scanner.nextLine();
+
+            adminsController.cadastrarAdminDb(nome,cpf, endereco, sexo, dataNascimento, login, senha);
 
             System.out.println("Administrador cadastrado com sucesso!");
 

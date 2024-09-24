@@ -51,25 +51,27 @@ public class MedicosController {
         }
     }
 
-    public void cadastrarMedicoDb (String nome, Long cpf, String crm, String endereco,
-                                   String sexo, LocalDate dataNascimento, String especializacoes){
+    public void cadastrarMedicoDb(String nome, Long cpf, String crm, String especializacoes,
+                                String endereco, String sexo, LocalDate dataNascimento,  String login, String senha){
         try {
             Medicos novoMedico = new Medicos();
             novoMedico.setNome(nome);
             novoMedico.setCpf(cpf);
-            novoMedico.setCrm(crm);
             novoMedico.setSexo(sexo);
             novoMedico.setEndereco(endereco);
             novoMedico.setDataNascimento(dataNascimento);
+            novoMedico.setCrm(crm);
             novoMedico.setEspecializacoes(especializacoes);
+            novoMedico.setLogin(login);
+            novoMedico.setSenha(senha);
 
             medicosService.cadastrarMedicoDb(novoMedico);
         } catch (MedicoExistenteException e) {
-            Medicos medicoExistente = e.getMedicoExistente();
+            Medicos medicoExostente = e.getMedicoExistente();
             System.err.println("Erro: " + e.getMessage());
             System.err.println("Dados do médico já cadastrado:");
-            System.err.println("Nome: " + medicoExistente.getNome());
-            System.err.println("CPF: " + medicoExistente.getCpf());
+            System.err.println("Nome: " + medicoExostente.getNome());
+            System.err.println("CPF: " + medicoExostente.getCpf());
 
         } catch (DadosMedicoInvalidosException e) {
             System.err.println("Erro: Dados inválidos. " + e.getMessage());
@@ -83,7 +85,6 @@ public class MedicosController {
             e.printStackTrace();
         }
     }
-
     public void listarMedicos() {
         List<Medicos> listaMedicos = medicosService.listarMedicos();
         System.out.println("---- Médicos armazenados localmente: ----");
