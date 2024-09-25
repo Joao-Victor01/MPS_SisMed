@@ -45,22 +45,21 @@ public class Main {
         MedicosController medicosController = new MedicosController(medicosService);
         AdminsController adminsController = new AdminsController(adminsService);
 
-        // LoginFacadeInterfaceImpl para centralizar o login
+        // login
         LoginFacadeInterfaceImpl loginFacade = new LoginFacadeInterfaceImpl(medicosService, pacientesService, adminsService);
 
-        // UsuarioController precisa da interface LoginFacadeInterface
+        // UsuarioController
         UsuarioController usuarioController = new UsuarioController(loginFacade);
 
         MenuLoginEfetuado menuLoginEfetuado = new MenuLoginEfetuado(medicosService, pacientesService, adminsService);
         MenuLogin menuLogin = new MenuLogin(usuarioController, menuLoginEfetuado);
 
-        // Instanciando o menu de escolhas (cadastros, listagens, etc.)
+        // Instanciando o menu
         MenuChoices menuChoices = new MenuChoices(adminsController, medicosController, pacientesController);
 
         // Instanciando o menu principal
         MenuSistema menuSistema = new MenuSistema(menuChoices, menuLogin);
 
-        // Sistema
         menuSistema.exibirMenu();
 
         db.disconnect();
