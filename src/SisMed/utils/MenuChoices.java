@@ -53,7 +53,6 @@ public class MenuChoices {
 
             pacientesController.cadastrarPaciente(nome, cpf, endereco, sexo, dataNascimento, login, senha);
 
-            System.out.println("Paciente cadastrado com sucesso!");
         } else if (opcao == 2) {
             System.out.println("Opção escolhida: cadastro na base de dados!\nPreencha os campos a seguir:\n");
             System.out.print("Nome: ");
@@ -80,7 +79,6 @@ public class MenuChoices {
 
             pacientesController.cadastrarPacienteDb(nome, cpf, endereco, sexo, dataNascimento, login, senha);
 
-            System.out.println("Paciente cadastrado com sucesso!");
 
         } else{
             System.out.println("Opção Inválida.");
@@ -129,7 +127,6 @@ public class MenuChoices {
 
             medicosController.cadastrarMedico(nome, cpf, crm, especializacoes, endereco, sexo, dataNascimento, login, senha);
 
-                System.out.println("Médico cadastrado com sucesso!");
         } else if (opcao == 2) {
             System.out.println("Opção escolhida: cadastro na base de dados!\nPreencha os campos a seguir:\n");
 
@@ -162,8 +159,6 @@ public class MenuChoices {
             String senha = scanner.nextLine();
 
             medicosController.cadastrarMedicoDb(nome, cpf, crm, especializacoes, endereco, sexo, dataNascimento, login, senha);
-
-            System.out.println("Médico cadastrado com sucesso!");
 
         } else{
             System.out.println("Opção Inválida.");
@@ -206,7 +201,6 @@ public class MenuChoices {
 
             adminsController.cadastrarAdmin(nome, cpf, endereco, sexo, dataNascimento, login, senha);
 
-            System.out.println("Administrador cadastrado com sucesso!");
         } else if (opcao == 2) {
             System.out.println("Opção escolhida: cadastro na base de dados!\nPreencha os campos a seguir:\n");
 
@@ -233,8 +227,6 @@ public class MenuChoices {
             String senha = scanner.nextLine();
 
             adminsController.cadastrarAdminDb(nome,cpf, endereco, sexo, dataNascimento, login, senha);
-
-            System.out.println("Administrador cadastrado com sucesso!");
 
         } else{
             System.out.println("Opção Inválida.");
