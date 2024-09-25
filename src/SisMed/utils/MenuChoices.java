@@ -14,7 +14,6 @@ public class MenuChoices {
     private AdminsController adminsController;
     private Scanner scanner = new Scanner(System.in);
 
-    public MenuChoices(){};
     public MenuChoices(AdminsController adminsController, MedicosController medicosController, PacientesController pacientesController){
         this.pacientesController = pacientesController;
         this.adminsController = adminsController;

@@ -5,13 +5,11 @@ import SisMed.exception.DadosAdminInvalidosException;
 import SisMed.exception.DadosMedicoInvalidosException;
 import SisMed.exception.ErroCadastroAdminException;
 import SisMed.model.Admins;
-import SisMed.model.Pacientes;
 import SisMed.repository.AdminsRepository;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class AdminsService {
 
@@ -46,7 +44,8 @@ public class AdminsService {
 
 
     public void cadastrarAdminDb(Admins admin) {
-        final String sql = "INSERT INTO Administradores (nome, cpf, endereco, sexo, dataNascimento) VALUES (?, ?, ?, ?, ?)";
+        final String sql = "INSERT INTO Administradores (nome, cpf, endereco, sexo, dataNascimento, userName, senha, userType)" +
+                " VALUES (?, ?, ?, ?, ?, ?, ?, 3)";
 
         try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setString(1, admin.getNome());
@@ -54,6 +53,8 @@ public class AdminsService {
             pstmt.setString(3, admin.getEndereco());
             pstmt.setString(4, admin.getSexo());
             pstmt.setDate(5, Date.valueOf(admin.getDataNascimento()));
+            pstmt.setString(6,admin.getUserName());
+            pstmt.setString(7, admin.getSenha());
             pstmt.executeUpdate();
             System.out.println("Administrador inserido com sucesso!");
         } catch (SQLException e) {
@@ -83,6 +84,51 @@ public class AdminsService {
             e.printStackTrace();
         }
         return admins;
+    }
+
+    public boolean loginAdmin(String userName, String senha) {
+        String sql = "SELECT * FROM Administradores WHERE userName = ? AND senha = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setString(1, userName);
+            stmt.setString(2, senha);
+
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public Admins filtrarAdminUserName(String userName) {
+        String sql = "SELECT * FROM Administradores WHERE userName = ?";
+        Admins admin = null;
+
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setString(1, userName);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                admin = new Admins();
+                admin.setNome(rs.getString("nome"));
+                admin.setCpf(rs.getLong("cpf"));
+                admin.setEndereco(rs.getString("endereco"));
+                admin.setSexo(rs.getString("sexo"));
+                admin.setDataNascimento(rs.getDate("dataNascimento").toLocalDate());
+                admin.setUserName(rs.getString("userName"));
+                admin.setSenha(rs.getString("senha"));
+                admin.setUserType(rs.getInt("userType"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return admin;
     }
 
     private void validarDadosAdmin(Admins admin) {

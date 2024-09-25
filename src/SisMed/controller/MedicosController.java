@@ -17,7 +17,7 @@ public class MedicosController {
     }
 
     public void cadastrarMedico(String nome, Long cpf, String crm, String especializacoes,
-                                String endereco, String sexo, LocalDate dataNascimento,  String login, String senha){
+                                String endereco, String sexo, LocalDate dataNascimento,  String userName, String senha){
         try {
             Medicos novoMedico = new Medicos();
             novoMedico.setNome(nome);
@@ -27,7 +27,7 @@ public class MedicosController {
             novoMedico.setDataNascimento(dataNascimento);
             novoMedico.setCrm(crm);
             novoMedico.setEspecializacoes(especializacoes);
-            novoMedico.setLogin(login);
+            novoMedico.setUserName(userName);
             novoMedico.setSenha(senha);
 
             medicosService.cadastrarMedico(novoMedico);
@@ -52,7 +52,7 @@ public class MedicosController {
     }
 
     public void cadastrarMedicoDb(String nome, Long cpf, String crm, String especializacoes,
-                                String endereco, String sexo, LocalDate dataNascimento,  String login, String senha){
+                                String endereco, String sexo, LocalDate dataNascimento,  String userName, String senha){
         try {
             Medicos novoMedico = new Medicos();
             novoMedico.setNome(nome);
@@ -62,7 +62,7 @@ public class MedicosController {
             novoMedico.setDataNascimento(dataNascimento);
             novoMedico.setCrm(crm);
             novoMedico.setEspecializacoes(especializacoes);
-            novoMedico.setLogin(login);
+            novoMedico.setUserName(userName);
             novoMedico.setSenha(senha);
 
             medicosService.cadastrarMedicoDb(novoMedico);

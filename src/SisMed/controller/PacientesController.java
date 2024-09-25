@@ -17,7 +17,7 @@ public class PacientesController {
         this.pacientesService = pacienteService;
     }
 
-    public void cadastrarPaciente(String nome, Long cpf, String endereco, String sexo, LocalDate dataNascimento, String login, String senha){
+    public void cadastrarPaciente(String nome, Long cpf, String endereco, String sexo, LocalDate dataNascimento, String userName, String senha){
         try {
             Pacientes novoPaciente = new Pacientes();
             novoPaciente.setNome(nome);
@@ -25,7 +25,7 @@ public class PacientesController {
             novoPaciente.setSexo(sexo);
             novoPaciente.setEndereco(endereco);
             novoPaciente.setDataNascimento(dataNascimento);
-            novoPaciente.setLogin(login);
+            novoPaciente.setUserName(userName);
             novoPaciente.setSenha(senha);
 
             pacientesService.cadastrarPaciente(novoPaciente);
@@ -49,7 +49,7 @@ public class PacientesController {
         }
     }
 
-    public void cadastrarPacienteDb(String nome, Long cpf, String endereco, String sexo, LocalDate dataNascimento, String login, String senha){
+    public void cadastrarPacienteDb(String nome, Long cpf, String endereco, String sexo, LocalDate dataNascimento, String userName, String senha){
         try {
             Pacientes novoPaciente = new Pacientes();
             novoPaciente.setNome(nome);
@@ -57,7 +57,7 @@ public class PacientesController {
             novoPaciente.setSexo(sexo);
             novoPaciente.setEndereco(endereco);
             novoPaciente.setDataNascimento(dataNascimento);
-            novoPaciente.setLogin(login);
+            novoPaciente.setUserName(userName);
             novoPaciente.setSenha(senha);
 
             pacientesService.cadastrarPacienteDb(novoPaciente);

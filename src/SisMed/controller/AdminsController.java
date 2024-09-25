@@ -15,7 +15,7 @@ public class AdminsController {
         this.adminsService = adminsService;
     }
 
-    public void cadastrarAdmin(String nome, Long cpf, String endereco, String sexo, LocalDate dataNascimento, String login, String senha){
+    public void cadastrarAdmin(String nome, Long cpf, String endereco, String sexo, LocalDate dataNascimento, String userName, String senha){
         try {
             Admins novoAdmin = new Admins();
             novoAdmin.setNome(nome);
@@ -23,7 +23,7 @@ public class AdminsController {
             novoAdmin.setSexo(sexo);
             novoAdmin.setEndereco(endereco);
             novoAdmin.setDataNascimento(dataNascimento);
-            novoAdmin.setLogin(login);
+            novoAdmin.setUserName(userName);
             novoAdmin.setSenha(senha);
 
             adminsService.cadastrarAdmin(novoAdmin);
@@ -46,7 +46,7 @@ public class AdminsController {
             e.printStackTrace();
         }
     }
-    public void cadastrarAdminDb(String nome, Long cpf, String endereco, String sexo, LocalDate dataNascimento, String login, String senha){
+    public void cadastrarAdminDb(String nome, Long cpf, String endereco, String sexo, LocalDate dataNascimento, String userName, String senha){
         try {
             Admins novoAdmin = new Admins();
             novoAdmin.setNome(nome);
@@ -54,7 +54,7 @@ public class AdminsController {
             novoAdmin.setSexo(sexo);
             novoAdmin.setEndereco(endereco);
             novoAdmin.setDataNascimento(dataNascimento);
-            novoAdmin.setLogin(login);
+            novoAdmin.setUserName(userName);
             novoAdmin.setSenha(senha);
 
             adminsService.cadastrarAdminDb(novoAdmin);

@@ -41,7 +41,10 @@ public class H2Database {
                 "sexo VARCHAR(15), " +
                 "dataNascimento DATE, " +
                 "ficha VARCHAR(500), " +
-                "historicoMedico VARCHAR(500));";
+                "historicoMedico VARCHAR(500)," +
+                "userName VARCHAR(12), " +
+                "senha VARCHAR(128), " +
+                "userType INT);";
         try (Statement stmt = connection.createStatement()) {
             stmt.execute(sql);
             System.out.println("Tabela Pacientes criada com sucesso.");
@@ -59,7 +62,10 @@ public class H2Database {
                 "endereco VARCHAR(255), " +
                 "sexo VARCHAR(15), " +
                 "dataNascimento DATE, " +
-                "especializacoes VARCHAR(200));";
+                "especializacoes VARCHAR(200)," +
+                "userName VARCHAR(12)," +
+                "senha VARCHAR(128), " +
+                "userType INT);";
         try (Statement stmt = connection.createStatement()) {
             stmt.execute(sql);
             System.out.println("Tabela Médicos criada com sucesso.");
@@ -75,7 +81,10 @@ public class H2Database {
                 "cpf VARCHAR(11) NOT NULL, " +
                 "endereco VARCHAR(255), " +
                 "sexo VARCHAR(15), " +
-                "dataNascimento DATE); ";
+                "dataNascimento DATE," +
+                "userName VARCHAR(12)," +
+                "senha VARCHAR(128)," +
+                "userType INT); ";
         try (Statement stmt = connection.createStatement()) {
             stmt.execute(sql);
             System.out.println("Tabela Administradores criada com sucesso.");
