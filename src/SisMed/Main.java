@@ -40,24 +40,19 @@ public class Main {
         MedicosService medicosService = new MedicosService(medicosRepository, connection);
         AdminsService adminsService = new AdminsService(adminsRepository, connection);
 
+        // Interfaces
+        LoginFacadeInterfaceImpl loginFacade = new LoginFacadeInterfaceImpl(medicosService, pacientesService, adminsService);
+
         // Controllers
         PacientesController pacientesController = new PacientesController(pacientesService);
         MedicosController medicosController = new MedicosController(medicosService);
         AdminsController adminsController = new AdminsController(adminsService);
-
-        // login
-        LoginFacadeInterfaceImpl loginFacade = new LoginFacadeInterfaceImpl(medicosService, pacientesService, adminsService);
-
-        // UsuarioController
         UsuarioController usuarioController = new UsuarioController(loginFacade);
 
+        // Menus
         MenuLoginEfetuado menuLoginEfetuado = new MenuLoginEfetuado(medicosService, pacientesService, adminsService);
         MenuLogin menuLogin = new MenuLogin(usuarioController, menuLoginEfetuado);
-
-        // Instanciando o menu
         MenuChoices menuChoices = new MenuChoices(adminsController, medicosController, pacientesController);
-
-        // Instanciando o menu principal
         MenuSistema menuSistema = new MenuSistema(menuChoices, menuLogin);
 
         menuSistema.exibirMenu();
