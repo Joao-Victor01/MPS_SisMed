@@ -1,15 +1,10 @@
 package SisMed;
 
-import SisMed.controller.AdminsController;
-import SisMed.controller.MedicosController;
-import SisMed.controller.PacientesController;
-import SisMed.controller.UsuarioController;
+import SisMed.controller.*;
 import SisMed.interfaces.LoginFacadeInterfaceImpl;
-import SisMed.repository.AdminsRepository;
-import SisMed.repository.H2Database;
-import SisMed.repository.MedicosRepository;
-import SisMed.repository.PacientesRepository;
+import SisMed.repository.*;
 import SisMed.service.AdminsService;
+import SisMed.service.ConsultasService;
 import SisMed.service.MedicosService;
 import SisMed.service.PacientesService;
 import SisMed.utils.MenuChoices;
@@ -29,16 +24,19 @@ public class Main {
         db.criarTabelaPacientes();
         db.criarTabelaMedicos();
         db.criarTabelaAdmins();
+        db.criarTabelaConsultas();
 
         // Repositórios
         PacientesRepository pacientesRepository = new PacientesRepository();
         MedicosRepository medicosRepository = new MedicosRepository();
         AdminsRepository adminsRepository = new AdminsRepository();
+        ConsultasRepository consultasRepository = new ConsultasRepository();
 
         // Serviços
         PacientesService pacientesService = new PacientesService(pacientesRepository, connection);
         MedicosService medicosService = new MedicosService(medicosRepository, connection);
         AdminsService adminsService = new AdminsService(adminsRepository, connection);
+        ConsultasService consultasService = new ConsultasService(consultasRepository, connection);
 
         // Interfaces
         LoginFacadeInterfaceImpl loginFacade = new LoginFacadeInterfaceImpl(medicosService, pacientesService, adminsService);
@@ -48,11 +46,12 @@ public class Main {
         MedicosController medicosController = new MedicosController(medicosService);
         AdminsController adminsController = new AdminsController(adminsService);
         UsuarioController usuarioController = new UsuarioController(loginFacade);
+        ConsultasController consultasController = new ConsultasController(consultasService);
 
         // Menus
         MenuLoginEfetuado menuLoginEfetuado = new MenuLoginEfetuado(medicosService, pacientesService, adminsService);
         MenuLogin menuLogin = new MenuLogin(usuarioController, menuLoginEfetuado);
-        MenuChoices menuChoices = new MenuChoices(adminsController, medicosController, pacientesController);
+        MenuChoices menuChoices = new MenuChoices(adminsController, medicosController, pacientesController, consultasController);
         MenuSistema menuSistema = new MenuSistema(menuChoices, menuLogin);
 
         menuSistema.exibirMenu();
