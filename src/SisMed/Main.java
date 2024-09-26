@@ -8,6 +8,7 @@ import SisMed.service.ConsultasService;
 import SisMed.service.MedicosService;
 import SisMed.service.PacientesService;
 import SisMed.utils.MenuChoices;
+import SisMed.utils.MenuChoicesConsultas;
 import SisMed.utils.MenuLogin;
 import SisMed.utils.MenuLoginEfetuado;
 import SisMed.view.MenuSistema;
@@ -49,7 +50,8 @@ public class Main {
         ConsultasController consultasController = new ConsultasController(consultasService);
 
         // Menus
-        MenuLoginEfetuado menuLoginEfetuado = new MenuLoginEfetuado(medicosService, pacientesService, adminsService);
+        MenuChoicesConsultas menuChoicesConsultas = new MenuChoicesConsultas(consultasController);
+        MenuLoginEfetuado menuLoginEfetuado = new MenuLoginEfetuado(medicosService, pacientesService, adminsService, menuChoicesConsultas);
         MenuLogin menuLogin = new MenuLogin(usuarioController, menuLoginEfetuado);
         MenuChoices menuChoices = new MenuChoices(adminsController, medicosController, pacientesController, consultasController);
         MenuSistema menuSistema = new MenuSistema(menuChoices, menuLogin);

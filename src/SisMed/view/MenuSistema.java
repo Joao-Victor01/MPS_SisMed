@@ -25,12 +25,7 @@ public class MenuSistema {
             System.out.println("3. Cadastrar novo Administrador");
             System.out.println("4. Listar todos os Usuários");
             System.out.println("5. Fazer login");
-            System.out.println("6. Marcar uma consulta");
-            System.out.println("7. Listar consultas");
-            System.out.println("8. Atualizar uma consulta");
-            System.out.println("9. Remover uma consulta");
-            System.out.println("10. Listar todas Consultas");
-            System.out.println("11. Sair");
+            System.out.println("6. Sair");
             System.out.println();
 
             int opcao = scanner.nextInt();
@@ -53,21 +48,6 @@ public class MenuSistema {
                     menuLogin.login();
                     break;
                 case 6:
-                    menuChoices.cadastrarConsulta();
-                    break;
-                case 7:
-                    menuChoices.listarConsultas();
-                    break;
-                case 8:
-                    menuChoices.atualizarConsulta();
-                    break;
-                case 9:
-                    menuChoices.removerConsulta();
-                    break;
-                case 10:
-                    menuChoices.listarTodasConsultas();
-                    break;
-                case 11:
                     System.out.println("Saindo do sistema.");
                     return;
                 default:
