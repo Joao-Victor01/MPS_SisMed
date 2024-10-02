@@ -4,7 +4,6 @@ import SisMed.exception.DadosPacienteInvalidosException;
 import SisMed.exception.ErroCadastroPacienteException;
 import SisMed.exception.PacienteExistenteException;
 import SisMed.model.Pacientes;
-import SisMed.repository.H2Database;
 import SisMed.repository.PacientesRepository;
 
 import java.sql.*;
@@ -43,7 +42,7 @@ public class PacientesService {
 
 
     public void cadastrarPacienteDb(Pacientes paciente) {
-        final String sql = "INSERT INTO Pacientes (nome, cpf, endereco, sexo, dataNascimento) VALUES (?, ?, ?, ?, ?)";
+        final String sql = "INSERT INTO Pacientes (nome, cpf, endereco, sexo, dataNascimento, userName, senha, userType) VALUES (?, ?, ?, ?, ?, ?, ?, 2)";
 
         try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setString(1, paciente.getNome());
@@ -51,6 +50,8 @@ public class PacientesService {
             pstmt.setString(3, paciente.getEndereco());
             pstmt.setString(4, paciente.getSexo());
             pstmt.setDate(5, Date.valueOf(paciente.getDataNascimento()));
+            pstmt.setString(6, paciente.getUserName());
+            pstmt.setString(7, paciente.getSenha());
             pstmt.executeUpdate();
             System.out.println("Paciente inserido com sucesso!");
         } catch (SQLException e) {
@@ -81,6 +82,51 @@ public class PacientesService {
             e.printStackTrace();
         }
         return pacientes;
+    }
+
+    public boolean loginPaciente(String userName, String senha) {
+        String sql = "SELECT * FROM Pacientes WHERE userName = ? AND senha = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setString(1, userName);
+            stmt.setString(2, senha);
+
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public Pacientes filtrarPacienteUserName(String userName) {
+        String sql = "SELECT * FROM Pacientes WHERE userName = ?";
+        Pacientes paciente = null;
+
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setString(1, userName);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                paciente = new Pacientes();
+                paciente.setNome(rs.getString("nome"));
+                paciente.setCpf(rs.getLong("cpf"));
+                paciente.setEndereco(rs.getString("endereco"));
+                paciente.setSexo(rs.getString("sexo"));
+                paciente.setDataNascimento(rs.getDate("dataNascimento").toLocalDate());
+                paciente.setUserName(rs.getString("userName"));
+                paciente.setSenha(rs.getString("senha"));
+                paciente.setUserType(rs.getInt("userType"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return paciente;
     }
 
 

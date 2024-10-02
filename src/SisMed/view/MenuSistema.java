@@ -1,20 +1,19 @@
 package SisMed.view;
 
-import SisMed.controller.AdminsController;
-import SisMed.controller.MedicosController;
-import SisMed.controller.PacientesController;
 import SisMed.utils.MenuChoices;
+import SisMed.utils.MenuLogin;
 
-import java.time.LocalDate;
 import java.util.Scanner;
 
 public class MenuSistema {
 
     private MenuChoices menuChoices;
+    private MenuLogin menuLogin;
     private Scanner scanner = new Scanner(System.in);
 
-    public MenuSistema(MenuChoices menuChoices) {
+    public MenuSistema(MenuChoices menuChoices, MenuLogin menuLogin) {
         this.menuChoices = menuChoices;
+        this.menuLogin = menuLogin;
     }
 
     public void exibirMenu() {
@@ -25,7 +24,9 @@ public class MenuSistema {
             System.out.println("2. Cadastrar novo Médico");
             System.out.println("3. Cadastrar novo Administrador");
             System.out.println("4. Listar todos os Usuários");
-            System.out.println("5. Sair");
+            System.out.println("5. Fazer login");
+            System.out.println("6. Sair");
+            System.out.println();
 
             int opcao = scanner.nextInt();
             scanner.nextLine();
@@ -44,6 +45,9 @@ public class MenuSistema {
                     menuChoices.listarUsuarios();
                     break;
                 case 5:
+                    menuLogin.login();
+                    break;
+                case 6:
                     System.out.println("Saindo do sistema.");
                     return;
                 default:
@@ -51,6 +55,4 @@ public class MenuSistema {
             }
         }
     }
-
-
 }

@@ -8,10 +8,20 @@ public class Usuarios {
     private String endereco;
     private String sexo;
     private LocalDate dataNascimento;
-    private String login;
+    private String userName;
     private String senha;
+    private Integer userType;
+
 
     // Getters e Setters
+    public Integer getUserType() {
+        return userType;
+    }
+
+    public void setUserType(Integer userType) {
+        this.userType = userType;
+    }
+
     public String getNome() {
         return nome;
     }
@@ -52,21 +62,21 @@ public class Usuarios {
         this.dataNascimento = dataNascimento;
     }
 
-    public String getLogin() {
-        return login;
+    public String getUserName() {
+        return userName;
     }
 
-    public void createLogin(String login) {
-        if (login == null || login.isEmpty()) {
-            throw new IllegalArgumentException("Login não pode ser vazio.");
+    public void createUserName(String userName) {
+        if (userName == null || userName.isEmpty()) {
+            throw new IllegalArgumentException("Nome de usuário não pode ser vazio.");
         }
-        if (login.length() > 12) {
-            throw new IllegalArgumentException("Login não pode ter mais que 12 caracteres.");
+        if (userName.length() > 12) {
+            throw new IllegalArgumentException("Nome de usuário não pode ter mais que 12 caracteres.");
         }
-        if (login.matches(".*\\d.*")) {
-            throw new IllegalArgumentException("Login não pode conter números.");
+        if (userName.matches(".*\\d.*")) {
+            throw new IllegalArgumentException("Nome de usuário não pode conter números.");
         }
-        this.login = login;
+        this.userName = userName;
     }
 
     public String getSenha() {
@@ -93,5 +103,9 @@ public class Usuarios {
             throw new IllegalArgumentException("Senha não pode conter espaços em branco.");
         }
         this.senha = senha;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 }

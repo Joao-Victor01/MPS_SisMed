@@ -1,6 +1,7 @@
 package SisMed.utils;
 
 import SisMed.controller.AdminsController;
+import SisMed.controller.ConsultasController;
 import SisMed.controller.MedicosController;
 import SisMed.controller.PacientesController;
 
@@ -12,13 +13,14 @@ public class MenuChoices {
     private PacientesController pacientesController;
     private MedicosController medicosController;
     private AdminsController adminsController;
+    private ConsultasController consultasController;
     private Scanner scanner = new Scanner(System.in);
 
-    public MenuChoices(){};
-    public MenuChoices(AdminsController adminsController, MedicosController medicosController, PacientesController pacientesController){
+    public MenuChoices(AdminsController adminsController, MedicosController medicosController, PacientesController pacientesController, ConsultasController consultasController){
         this.pacientesController = pacientesController;
         this.adminsController = adminsController;
         this.medicosController = medicosController;
+        this.consultasController = consultasController;
     }
 
     public void cadastrarPaciente() {
@@ -46,9 +48,14 @@ public class MenuChoices {
             System.out.print("Data de Nascimento (yyyy-MM-dd): ");
             LocalDate dataNascimento = LocalDate.parse(scanner.nextLine());
 
-            pacientesController.cadastrarPaciente(nome, cpf, endereco, sexo, dataNascimento);
+            System.out.print("Login: ");
+            String login = scanner.nextLine();
 
-            System.out.println("Paciente cadastrado com sucesso!");
+            System.out.print("Senha: ");
+            String senha = scanner.nextLine();
+
+            pacientesController.cadastrarPaciente(nome, cpf, endereco, sexo, dataNascimento, login, senha);
+
         } else if (opcao == 2) {
             System.out.println("Opção escolhida: cadastro na base de dados!\nPreencha os campos a seguir:\n");
             System.out.print("Nome: ");
@@ -67,9 +74,14 @@ public class MenuChoices {
             System.out.print("Data de Nascimento (yyyy-MM-dd): ");
             LocalDate dataNascimento = LocalDate.parse(scanner.nextLine());
 
-            pacientesController.cadastrarPacienteDb(nome, cpf, endereco, sexo, dataNascimento);
+            System.out.print("Login: ");
+            String login = scanner.nextLine();
 
-            System.out.println("Paciente cadastrado com sucesso!");
+            System.out.print("Senha: ");
+            String senha = scanner.nextLine();
+
+            pacientesController.cadastrarPacienteDb(nome, cpf, endereco, sexo, dataNascimento, login, senha);
+
 
         } else{
             System.out.println("Opção Inválida.");
@@ -110,9 +122,14 @@ public class MenuChoices {
             System.out.print("Especializações: ");
             String especializacoes = scanner.nextLine();
 
-            medicosController.cadastrarMedico(nome, cpf, crm, especializacoes, endereco, sexo, dataNascimento);
+            System.out.print("Login: ");
+            String login = scanner.nextLine();
 
-                System.out.println("Médico cadastrado com sucesso!");
+            System.out.print("Senha: ");
+            String senha = scanner.nextLine();
+
+            medicosController.cadastrarMedico(nome, cpf, crm, especializacoes, endereco, sexo, dataNascimento, login, senha);
+
         } else if (opcao == 2) {
             System.out.println("Opção escolhida: cadastro na base de dados!\nPreencha os campos a seguir:\n");
 
@@ -138,9 +155,13 @@ public class MenuChoices {
             System.out.print("Especializações: ");
             String especializacoes = scanner.nextLine();
 
-            medicosController.cadastrarMedicoDb(nome,cpf, crm, endereco, sexo, dataNascimento, especializacoes);
+            System.out.print("Login: ");
+            String login = scanner.nextLine();
 
-            System.out.println("Médico cadastrado com sucesso!");
+            System.out.print("Senha: ");
+            String senha = scanner.nextLine();
+
+            medicosController.cadastrarMedicoDb(nome, cpf, crm, especializacoes, endereco, sexo, dataNascimento, login, senha);
 
         } else{
             System.out.println("Opção Inválida.");
@@ -174,10 +195,15 @@ public class MenuChoices {
             System.out.print("Data de Nascimento (yyyy-MM-dd): ");
             LocalDate dataNascimento = LocalDate.parse(scanner.nextLine());
 
+            System.out.print("Login: ");
+            String login = scanner.nextLine();
 
-            adminsController.cadastrarAdmin(nome, cpf, endereco, sexo, dataNascimento);
+            System.out.print("Senha: ");
+            String senha = scanner.nextLine();
 
-            System.out.println("Administrador cadastrado com sucesso!");
+
+            adminsController.cadastrarAdmin(nome, cpf, endereco, sexo, dataNascimento, login, senha);
+
         } else if (opcao == 2) {
             System.out.println("Opção escolhida: cadastro na base de dados!\nPreencha os campos a seguir:\n");
 
@@ -197,9 +223,13 @@ public class MenuChoices {
             System.out.print("Data de Nascimento (yyyy-MM-dd): ");
             LocalDate dataNascimento = LocalDate.parse(scanner.nextLine());
 
-            adminsController.cadastrarAdminDb(nome,cpf, endereco, sexo, dataNascimento);
+            System.out.print("Login: ");
+            String login = scanner.nextLine();
 
-            System.out.println("Administrador cadastrado com sucesso!");
+            System.out.print("Senha: ");
+            String senha = scanner.nextLine();
+
+            adminsController.cadastrarAdminDb(nome,cpf, endereco, sexo, dataNascimento, login, senha);
 
         } else{
             System.out.println("Opção Inválida.");
@@ -221,4 +251,7 @@ public class MenuChoices {
         System.out.println("---------------------- \n");
 
     }
+
+
+
 }

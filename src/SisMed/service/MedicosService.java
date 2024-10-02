@@ -42,7 +42,8 @@ public class MedicosService {
     }
 
     public void cadastrarMedicoDb(Medicos medico) {
-        final String sql = "INSERT INTO Medicos (nome, cpf, crm, endereco, sexo, dataNascimento, especializacoes) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        final String sql = "INSERT INTO Medicos (nome, cpf, crm, endereco, sexo, dataNascimento, especializacoes, userName, senha, userType)" +
+                " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 1)";
 
         try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setString(1, medico.getNome());
@@ -52,6 +53,8 @@ public class MedicosService {
             pstmt.setString(5, medico.getSexo());
             pstmt.setDate(6, Date.valueOf(medico.getDataNascimento()));
             pstmt.setString(7, medico.getEspecializacoes());
+            pstmt.setString(8, medico.getUserName());
+            pstmt.setString(9, medico.getSenha());
             pstmt.executeUpdate();
             System.out.println("Médico inserido com sucesso!");
         } catch (SQLException e) {
@@ -83,6 +86,53 @@ public class MedicosService {
             e.printStackTrace();
         }
         return medicos;
+    }
+
+    public boolean loginMedico(String userName, String senha) {
+        String sql = "SELECT * FROM Medicos WHERE userName = ? AND senha = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setString(1, userName);
+            stmt.setString(2, senha);
+
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public Medicos filtrarMedicosUserName(String userName) {
+        String sql = "SELECT * FROM Medicos WHERE userName = ?";
+        Medicos medico = null;
+
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setString(1, userName);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                medico = new Medicos();
+                medico.setNome(rs.getString("nome"));
+                medico.setCpf(rs.getLong("cpf"));
+                medico.setCrm(rs.getString("crm"));
+                medico.setEndereco(rs.getString("endereco"));
+                medico.setSexo(rs.getString("sexo"));
+                medico.setDataNascimento(rs.getDate("dataNascimento").toLocalDate());
+                medico.setEspecializacoes(rs.getString("especializacoes"));
+                medico.setUserName(rs.getString("userName"));
+                medico.setSenha(rs.getString("senha"));
+                medico.setUserType(rs.getInt("userType"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return medico;
     }
 
     private void validarDadosMedico(Medicos medico) {
