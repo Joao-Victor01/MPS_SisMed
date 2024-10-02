@@ -1,0 +1,26 @@
+name: Construir
+on:
+  push:
+    branches:
+       - development
+       - TASK#MPS-Crud-Consultas
+       - TASK#MPS-FacadeLogin
+       - fix/part1-usercontrol
+       - TASK#SonarCloud
+
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  sonarcloud:
+    name: SonarCloud
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Clones superficiais devem ser desabilitados para uma melhor análise
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Para obter informações de PR
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
