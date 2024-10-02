@@ -1,6 +1,7 @@
 package SisMed.utils;
 
 import SisMed.controller.AdminsController;
+import SisMed.controller.ConsultasController;
 import SisMed.controller.MedicosController;
 import SisMed.controller.PacientesController;
 
@@ -12,12 +13,14 @@ public class MenuChoices {
     private PacientesController pacientesController;
     private MedicosController medicosController;
     private AdminsController adminsController;
+    private ConsultasController consultasController;
     private Scanner scanner = new Scanner(System.in);
 
-    public MenuChoices(AdminsController adminsController, MedicosController medicosController, PacientesController pacientesController){
+    public MenuChoices(AdminsController adminsController, MedicosController medicosController, PacientesController pacientesController, ConsultasController consultasController){
         this.pacientesController = pacientesController;
         this.adminsController = adminsController;
         this.medicosController = medicosController;
+        this.consultasController = consultasController;
     }
 
     public void cadastrarPaciente() {
@@ -248,4 +251,7 @@ public class MenuChoices {
         System.out.println("---------------------- \n");
 
     }
+
+
+
 }

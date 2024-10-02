@@ -26,6 +26,7 @@ public class MenuSistema {
             System.out.println("4. Listar todos os Usuários");
             System.out.println("5. Fazer login");
             System.out.println("6. Sair");
+            System.out.println();
 
             int opcao = scanner.nextInt();
             scanner.nextLine();

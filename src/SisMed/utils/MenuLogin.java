@@ -16,10 +16,15 @@ public class MenuLogin {
 
     public void login() {
         System.out.println("Escolha uma opção:");
-        System.out.println("\t1.Login Médico;\n\t2.Login Paciente;\n\t3.Login Administrador");
+        System.out.println("\t1.Login Médico;\n\t2.Login Paciente;\n\t3.Login Administrador\n\t4.Sair");
 
         int opcao = scanner.nextInt();
         scanner.nextLine();
+
+        if (opcao == 4) {
+            System.out.println("Saindo...");
+            System.exit(0);
+        }
 
         System.out.print("Nome de Usuário: ");
         String userName = scanner.nextLine();
@@ -36,10 +41,10 @@ public class MenuLogin {
                 menuLoginEfetuado.boasVindasPaciente(userName);
             } else if (opcao == 3) {
                 menuLoginEfetuado.boasVindasAdmin(userName);
+            } else {
+                System.out.println("Credenciais inválidas. Tente novamente.");
+                login();
             }
-        } else {
-            System.out.println("Credenciais inválidas. Tente novamente.");
-            login();
         }
     }
 }
