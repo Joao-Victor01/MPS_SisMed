@@ -6,6 +6,7 @@ on:
        - TASK#MPS-Crud-Consultas
        - TASK#MPS-FacadeLogin
        - fix/part1-usercontrol
+       - TASK#SonarCloud
 
   pull_request:
     types: [opened, synchronize, reopened]
