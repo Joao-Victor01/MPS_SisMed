@@ -1,6 +1,6 @@
 package com.SisMed.controller;
 
-import SisMed.exception.*;
+import com.SisMed.exception.*;
 import com.SisMed.exception.AdminExistenteException;
 import com.SisMed.exception.DadosAdminInvalidosException;
 import com.SisMed.exception.ErroCadastroAdminException;

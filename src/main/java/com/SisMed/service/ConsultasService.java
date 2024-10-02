@@ -1,6 +1,6 @@
 package com.SisMed.service;
 
-import SisMed.exception.*;
+import com.SisMed.exception.*;
 import com.SisMed.exception.ConsultaExistenteException;
 import com.SisMed.exception.DadosConsultaInvalidosException;
 import com.SisMed.exception.ErroCadastroConsultaException;

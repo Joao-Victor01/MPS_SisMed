@@ -1,20 +1,19 @@
-package SisMed;
+package com.SisMed;
 
-import SisMed.controller.*;
-import SisMed.interfaces.LoginFacadeInterfaceImpl;
-import SisMed.repository.*;
-import SisMed.service.AdminsService;
-import SisMed.service.ConsultasService;
-import SisMed.service.MedicosService;
-import SisMed.service.PacientesService;
-import SisMed.utils.MenuChoices;
-import SisMed.utils.MenuChoicesConsultas;
-import SisMed.utils.MenuLogin;
-import SisMed.utils.MenuLoginEfetuado;
-import SisMed.view.MenuSistema;
+import com.SisMed.controller.*;
+import com.SisMed.interfaces.LoginFacadeInterfaceImpl;
+import com.SisMed.repository.*;
+import com.SisMed.service.AdminsService;
+import com.SisMed.service.ConsultasService;
+import com.SisMed.service.MedicosService;
+import com.SisMed.service.PacientesService;
+import com.SisMed.utils.MenuChoices;
+import com.SisMed.utils.MenuChoicesConsultas;
+import com.SisMed.utils.MenuLogin;
+import com.SisMed.utils.MenuLoginEfetuado;
+import com.SisMed.view.MenuSistema;
 
 import java.sql.Connection;
-import java.sql.SQLException;
 
 public class Main {
 
