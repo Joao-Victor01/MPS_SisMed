@@ -5,9 +5,9 @@ import SisMed.controller.UsuarioController;
 import java.util.Scanner;
 
 public class MenuLogin {
-    private Scanner scanner = new Scanner(System.in);
-    private UsuarioController usuarioController;
-    private MenuLoginEfetuado menuLoginEfetuado;
+    private final Scanner scanner = new Scanner(System.in);
+    private final UsuarioController usuarioController;
+    private final MenuLoginEfetuado menuLoginEfetuado;
 
     public MenuLogin(UsuarioController usuarioController, MenuLoginEfetuado menuLoginEfetuado) {
         this.usuarioController = usuarioController;

@@ -7,9 +7,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
-public class PacientesRepository {
+public class PacientesRepository implements SisMed.interfaces.PacientesRepository {
 
-    private List<Pacientes> pacientes = new ArrayList<>();
+    private final List<Pacientes> pacientes = new ArrayList<>();
 
     public void salvar(Pacientes paciente) {
         pacientes.add(paciente);

@@ -3,7 +3,7 @@ package SisMed.controller;
 import SisMed.interfaces.LoginFacadeInterface;
 
 public class UsuarioController {
-    private LoginFacadeInterface loginFacadeInterface;
+    private final LoginFacadeInterface loginFacadeInterface;
 
     public UsuarioController(LoginFacadeInterface loginFacadeInterface) {
         this.loginFacadeInterface = loginFacadeInterface;

@@ -2,6 +2,7 @@ package SisMed;
 
 import SisMed.controller.*;
 import SisMed.interfaces.LoginFacadeInterfaceImpl;
+import SisMed.interfaces.RepositoryFactoryImpl;
 import SisMed.repository.*;
 import SisMed.service.AdminsService;
 import SisMed.service.ConsultasService;
@@ -12,6 +13,7 @@ import SisMed.utils.MenuChoicesConsultas;
 import SisMed.utils.MenuLogin;
 import SisMed.utils.MenuLoginEfetuado;
 import SisMed.view.MenuSistema;
+import SisMed.repository.PacientesRepository;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -28,15 +30,13 @@ public class Main {
         db.criarTabelaConsultas();
 
         // Repositórios
-        PacientesRepository pacientesRepository = new PacientesRepository();
-        MedicosRepository medicosRepository = new MedicosRepository();
-        AdminsRepository adminsRepository = new AdminsRepository();
+        RepositoryFactoryImpl repositoryFactory = new RepositoryFactoryImpl();
         ConsultasRepository consultasRepository = new ConsultasRepository();
 
         // Serviços
-        PacientesService pacientesService = new PacientesService(pacientesRepository, connection);
-        MedicosService medicosService = new MedicosService(medicosRepository, connection);
-        AdminsService adminsService = new AdminsService(adminsRepository, connection);
+        PacientesService pacientesService = new PacientesService(repositoryFactory, connection);
+        MedicosService medicosService = new MedicosService(repositoryFactory, connection);
+        AdminsService adminsService = new AdminsService(repositoryFactory, connection);
         ConsultasService consultasService = new ConsultasService(consultasRepository, connection);
 
         // Interfaces

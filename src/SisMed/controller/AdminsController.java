@@ -9,13 +9,13 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class AdminsController {
-    private AdminsService adminsService;
+    private final AdminsService adminsService;
 
-    public AdminsController(AdminsService adminsService){
+    public AdminsController(AdminsService adminsService) {
         this.adminsService = adminsService;
     }
 
-    public void cadastrarAdmin(String nome, Long cpf, String endereco, String sexo, LocalDate dataNascimento, String userName, String senha){
+    public void cadastrarAdmin(String nome, Long cpf, String endereco, String sexo, LocalDate dataNascimento, String userName, String senha) {
         try {
             Admins novoAdmin = new Admins();
             novoAdmin.setNome(nome);
@@ -46,7 +46,8 @@ public class AdminsController {
             e.printStackTrace();
         }
     }
-    public void cadastrarAdminDb(String nome, Long cpf, String endereco, String sexo, LocalDate dataNascimento, String userName, String senha){
+
+    public void cadastrarAdminDb(String nome, Long cpf, String endereco, String sexo, LocalDate dataNascimento, String userName, String senha) {
         try {
             Admins novoAdmin = new Admins();
             novoAdmin.setNome(nome);
@@ -77,6 +78,7 @@ public class AdminsController {
             e.printStackTrace();
         }
     }
+
     public void listarAdmins() {
         List<Admins> listaAdmins = adminsService.listarAdmins();
         System.out.println("---- Administradores armazenados localmente: ----");

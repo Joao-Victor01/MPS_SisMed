@@ -4,6 +4,7 @@ import SisMed.exception.AdminExistenteException;
 import SisMed.exception.DadosAdminInvalidosException;
 import SisMed.exception.DadosMedicoInvalidosException;
 import SisMed.exception.ErroCadastroAdminException;
+import SisMed.interfaces.RepositoryFactoryImpl;
 import SisMed.model.Admins;
 import SisMed.repository.AdminsRepository;
 
@@ -13,11 +14,11 @@ import java.util.List;
 
 public class AdminsService {
 
-    private AdminsRepository adminsRepository;
-    private Connection connection;
+    private final AdminsRepository adminsRepository;
+    private final Connection connection;
 
-    public AdminsService(AdminsRepository adminsRepository, Connection connection) {
-        this.adminsRepository = adminsRepository;
+    public AdminsService(RepositoryFactoryImpl repositoryFactory, Connection connection) {
+        this.adminsRepository = repositoryFactory.createAdminsRepository();
         this.connection = connection;
     }
 

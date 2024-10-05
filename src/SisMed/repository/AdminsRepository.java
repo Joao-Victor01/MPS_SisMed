@@ -7,9 +7,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
-public class AdminsRepository {
+public class AdminsRepository implements SisMed.interfaces.AdminsRepository {
 
-    private List<Admins> admins = new ArrayList<>();
+    private final List<Admins> admins = new ArrayList<>();
 
     public void salvar(Admins admin) {
         admins.add(admin);
@@ -21,7 +21,7 @@ public class AdminsRepository {
 
     public Optional<Admins> buscarPorCpf(Long cpf) {
         return admins.stream()
-                .filter(p -> Objects.equals(p.getCpf(), cpf))
+                .filter(admin -> Objects.equals(admin.getCpf(), cpf))
                 .findFirst();
     }
 }

@@ -3,6 +3,7 @@ package SisMed.service;
 import SisMed.exception.DadosPacienteInvalidosException;
 import SisMed.exception.ErroCadastroPacienteException;
 import SisMed.exception.PacienteExistenteException;
+import SisMed.interfaces.RepositoryFactoryImpl;
 import SisMed.model.Pacientes;
 import SisMed.repository.PacientesRepository;
 
@@ -11,11 +12,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PacientesService {
-    private PacientesRepository pacientesRepository;
-    private Connection connection;
+    private final PacientesRepository pacientesRepository;
+    private final Connection connection;
 
-    public PacientesService(PacientesRepository pacientesRepository, Connection connection){
-        this.pacientesRepository = pacientesRepository;
+    public PacientesService(RepositoryFactoryImpl repositoryFactory, Connection connection){
+        this.pacientesRepository = repositoryFactory.createPacientesRepository();
         this.connection = connection;
     }
 

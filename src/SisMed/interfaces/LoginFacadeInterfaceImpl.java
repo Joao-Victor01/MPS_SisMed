@@ -6,9 +6,9 @@ import SisMed.service.PacientesService;
 
 public class LoginFacadeInterfaceImpl implements LoginFacadeInterface {
 
-    private MedicosService medicoService;
-    private PacientesService pacienteService;
-    private AdminsService adminService;
+    private final MedicosService medicoService;
+    private final PacientesService pacienteService;
+    private final AdminsService adminService;
 
     public LoginFacadeInterfaceImpl (MedicosService medicoService, PacientesService pacienteService, AdminsService adminService) {
         this.medicoService = medicoService;
