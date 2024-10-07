@@ -1,63 +1,46 @@
 package SisMed;
 
-import SisMed.controller.*;
+import SisMed.controller.UsuarioController;
+import SisMed.database.DatabaseConnectionManager;
 import SisMed.interfaces.LoginFacadeInterfaceImpl;
-import SisMed.interfaces.RepositoryFactoryImpl;
-import SisMed.repository.*;
-import SisMed.service.AdminsService;
-import SisMed.service.ConsultasService;
-import SisMed.service.MedicosService;
-import SisMed.service.PacientesService;
-import SisMed.utils.MenuChoices;
-import SisMed.utils.MenuChoicesConsultas;
-import SisMed.utils.MenuLogin;
-import SisMed.utils.MenuLoginEfetuado;
-import SisMed.view.MenuSistema;
-import SisMed.repository.PacientesRepository;
-
-import java.sql.Connection;
-import java.sql.SQLException;
+import SisMed.login.AdminLoginStrategy;
+import SisMed.login.MedicoLoginStrategy;
+import SisMed.login.PacienteLoginStrategy;
+import SisMed.repository.UsuarioRepository;
+import SisMed.repository.UsuarioRepositoryInterface;
+import SisMed.service.UsuarioService;
+import SisMed.menus.MenuAcoes;
+import SisMed.menus.MenuLoginEfetuado;
 
 public class Main {
 
     public static void main(String[] args) {
-        H2Database db = new H2Database();
-        db.connect();
-        Connection connection = db.getConnection();
-        db.criarTabelaPacientes();
-        db.criarTabelaMedicos();
-        db.criarTabelaAdmins();
-        db.criarTabelaConsultas();
+        // 1. Inicializar o DatabaseConnectionManager
+        DatabaseConnectionManager dbManager = new DatabaseConnectionManager("jdbc:h2:mem:SisMedDB", "user", "");
 
-        // Repositórios
-        RepositoryFactoryImpl repositoryFactory = new RepositoryFactoryImpl();
-        ConsultasRepository consultasRepository = new ConsultasRepository();
+        // 2. Criar a UsuarioRepository usando o DatabaseConnectionManager
+        UsuarioRepositoryInterface usuarioRepository = new UsuarioRepository(dbManager);
 
-        // Serviços
-        PacientesService pacientesService = new PacientesService(repositoryFactory, connection);
-        MedicosService medicosService = new MedicosService(repositoryFactory, connection);
-        AdminsService adminsService = new AdminsService(repositoryFactory, connection);
-        ConsultasService consultasService = new ConsultasService(consultasRepository, connection);
+        // 3. Criar a UsuarioService usando a UsuarioRepository
+        UsuarioService usuarioService = new UsuarioService(usuarioRepository);
 
-        // Interfaces
-        LoginFacadeInterfaceImpl loginFacade = new LoginFacadeInterfaceImpl(medicosService, pacientesService, adminsService);
+        // 4. Criar a LoginFacadeInterfaceImpl e registrar as estratégias de login
+        LoginFacadeInterfaceImpl loginFacade = new LoginFacadeInterfaceImpl();
+        loginFacade.registrarLoginStrategy(1, new MedicoLoginStrategy(usuarioService)); // Passando UsuarioService
+        loginFacade.registrarLoginStrategy(2, new PacienteLoginStrategy(usuarioService)); // Passando UsuarioService
+        loginFacade.registrarLoginStrategy(3, new AdminLoginStrategy(usuarioService)); // Passando UsuarioService
 
-        // Controllers
-        PacientesController pacientesController = new PacientesController(pacientesService);
-        MedicosController medicosController = new MedicosController(medicosService);
-        AdminsController adminsController = new AdminsController(adminsService);
-        UsuarioController usuarioController = new UsuarioController(loginFacade);
-        ConsultasController consultasController = new ConsultasController(consultasService);
+        // 5. Criar a UsuarioController usando a UsuarioService e a LoginFacade
+        UsuarioController usuarioController = new UsuarioController(usuarioService, loginFacade);
 
-        // Menus
-        MenuChoicesConsultas menuChoicesConsultas = new MenuChoicesConsultas(consultasController);
-        MenuLoginEfetuado menuLoginEfetuado = new MenuLoginEfetuado(medicosService, pacientesService, adminsService, menuChoicesConsultas);
-        MenuLogin menuLogin = new MenuLogin(usuarioController, menuLoginEfetuado);
-        MenuChoices menuChoices = new MenuChoices(adminsController, medicosController, pacientesController, consultasController);
-        MenuSistema menuSistema = new MenuSistema(menuChoices, menuLogin);
+        // 6. Inicializar outros componentes conforme necessário (por exemplo, menus)
+        MenuAcoes menuAcoes = new MenuAcoes(usuarioController);
+        MenuLoginEfetuado menuLoginEfetuado = new MenuLoginEfetuado(usuarioController);
 
-        menuSistema.exibirMenu();
+        // Aqui você pode adicionar a lógica para exibir o menu ou iniciar o sistema
+        menuAcoes.exibirMenu(); // Supondo que você tenha um método para exibir o menu
 
-        db.disconnect();
+        // Desconectar do banco de dados ao final
+        dbManager.closeConnection(dbManager.getConnection());
     }
 }

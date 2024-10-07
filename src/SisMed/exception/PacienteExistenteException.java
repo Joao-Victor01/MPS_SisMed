@@ -1,17 +1,16 @@
 package SisMed.exception;
 
-import SisMed.model.Pacientes;
-import SisMed.model.Usuarios;
+import SisMed.model.Paciente;
 
 public class PacienteExistenteException extends RuntimeException{
-    private Pacientes pacienteExistente;
+    private Paciente pacienteExistente;
 
-    public PacienteExistenteException(String mensagem, Pacientes pacienteExistente){
+    public PacienteExistenteException(String mensagem, Paciente pacienteExistente){
         super(mensagem);
         this.pacienteExistente = pacienteExistente;
     }
 
-    public Pacientes getPacienteExistente() {
+    public Paciente getPacienteExistente() {
         return pacienteExistente;
     }
 }

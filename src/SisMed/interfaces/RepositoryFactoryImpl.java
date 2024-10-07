@@ -1,11 +1,6 @@
 package SisMed.interfaces;
 
 
-import SisMed.repository.MedicosRepository;
-import SisMed.repository.PacientesRepository;
-import SisMed.repository.AdminsRepository;
-
-
 public class RepositoryFactoryImpl implements RepositoryFactory {
     @Override
     public AdminsRepository createAdminsRepository() {

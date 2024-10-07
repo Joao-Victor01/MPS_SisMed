@@ -1,0 +1,44 @@
+O objetivo geral da refatoração é adequar o projeto para seguir os princípios SOLID. Para isso foram necessárias as etapas abaixo:
+
+1. Unificação de Usuários
+   1.1  Criar uma classe base UsuarioService para lidar com a lógica compartilhada
+   Todos os tipos de usuários (Paciente, Médico, Administrador) serão tratados como instâncias de Usuario, que será a classe base.
+   A partir disso, vamos centralizar a lógica de cadastro, listagem e login para usuários, e utilizar polimorfismo para diferenciar comportamentos específicos.
+   1.2. Classes específicas para cada tipo de usuário
+   Ainda vamos ter as classes específicas para Médico, Paciente e Admin como subclasses de Usuario.
+   Caso seja necessário um comportamento específico (ex: CRM para médicos), basta usar polimorfismo ou estratégias.
+
+2. Princípio Aberto/Fechado (OCP)
+    Na versão anterior, o LoginFacade provavelmente utilizava um switch para lidar com os diferentes tipos de usuários (médico, paciente, admin).
+    Isso será substituído por uma abordagem polimórfica.
+
+    Para implementar a situação acima:
+        Criar uma interface LoginStrategy: Cada tipo de login (médico, paciente, admin) terá sua própria implementação dessa interface.
+        Remover o switch no LoginFacadeInterfaceImpl: Substituímos pela utilização de um mapa de estratégias (LoginStrategy),
+        que permite adicionar novos tipos de login facilmente.
+
+3. Modificação do Factory
+    Como a lógica de usuários foi unificada para uma única tabela, é preciso adaptar o factory.
+    Além disso, os tipos de usuários continuam seguindo a lógica de:
+        1. Usuários do tipo "Médico";
+        2. Usuários do tipo "Paciente";
+        3. Usuários do tipo "Administrador".
+
+4. Princípio da Responsabilidade Única (SRP)
+    Classe UsuarioService, que atualmente pode estar gerenciando a lógica de negócio e a manipulação de dados. Vamos separá-la em duas partes:
+        - UsuarioService: Para lógica de negócio.
+        - UsuarioValidator: Para validação de dados de entrada.
+
+5. Segregação de Interfaces (ISP)
+    Como agora tivemos a unificação de todos os tipos de usuário para apenas uma tabela, diferenciando eles pelo campo "userType", precisamos separar as interfaces.
+    Isso irá garantir que nenhuma classe será forçada a depender de métodos que não utiliza, já que temos métodos diferentes para cada tipo de usuário. Sendo assim, serão criadas:
+        - MedicoInterface;
+        - PacienteInterface;
+        - AdminInterface.
+
+6. Princípio da Inversão de Dependência (DIP)
+    Ao invés das classes de alto nível (como serviços e controladores) dependerem diretamente de classes concretas (como repositórios),
+    elas devem depender de interfaces ou abstrações. Isso melhora a flexibilidade e a testabilidade do código. Para isso:
+        - Interface UsuarioRepositoryInterface criada;
+        - Usuário repository implementa UsuarioRepositoryInterface;
+        - UsuarioService agora depende da interface;

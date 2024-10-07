@@ -1,16 +1,16 @@
 package SisMed.exception;
 
-import SisMed.model.Admins;
+import SisMed.model.Admin;
 
 public class AdminExistenteException extends RuntimeException{
-    private Admins adminExistente ;
+    private Admin adminExistente ;
 
-    public AdminExistenteException(String mensagem, Admins admin){
+    public AdminExistenteException(String mensagem, Admin admin){
         super(mensagem);
         this.adminExistente = admin;
     }
 
-    public Admins getAdminExistente() {
+    public Admin getAdminExistente() {
         return adminExistente;
     }
 }

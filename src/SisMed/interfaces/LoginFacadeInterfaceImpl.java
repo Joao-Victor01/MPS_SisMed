@@ -1,32 +1,26 @@
 package SisMed.interfaces;
 
-import SisMed.service.AdminsService;
-import SisMed.service.MedicosService;
-import SisMed.service.PacientesService;
+import SisMed.login.LoginStrategy;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class LoginFacadeInterfaceImpl implements LoginFacadeInterface {
+    private Map<Integer, LoginStrategy> loginStrategies = new HashMap<>();
 
-    private final MedicosService medicoService;
-    private final PacientesService pacienteService;
-    private final AdminsService adminService;
+    public LoginFacadeInterfaceImpl() {
+    }
 
-    public LoginFacadeInterfaceImpl (MedicosService medicoService, PacientesService pacienteService, AdminsService adminService) {
-        this.medicoService = medicoService;
-        this.pacienteService = pacienteService;
-        this.adminService = adminService;
+    public void registrarLoginStrategy(Integer tipoUsuario, LoginStrategy loginStrategy) {
+        loginStrategies.put(tipoUsuario, loginStrategy);
     }
 
     @Override
-    public boolean login(Integer userType, String userName, String senha) {
-        switch (userType) {
-            case 1:
-                return medicoService.loginMedico(userName, senha);
-            case 2:
-                return pacienteService.loginPaciente(userName, senha);
-            case 3:
-                return adminService.loginAdmin(userName, senha);
-            default:
-                throw new IllegalArgumentException("Tipo de usuário inválido.");
+    public boolean login(Integer tipoUsuario, String userName, String senha) {
+        LoginStrategy strategy = loginStrategies.get(tipoUsuario);
+        if (strategy == null) {
+            throw new IllegalArgumentException("Tipo de usuário inválido.");
         }
+        return strategy.login(userName, senha);
     }
 }

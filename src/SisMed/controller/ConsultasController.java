@@ -95,28 +95,10 @@ public class ConsultasController {
         }
     }
 
-    public void listarConsultas(int option) {
-
-        if (option == 0) {
-            List<Consultas> listaConsultas = consultasService.listarConsultas();
-            System.out.println("---- Consultas armazenadas localmente: ----");
-            callListConsultas(listaConsultas);
-
+    public void listarConsultas() {
             List<Consultas> listaConsultasDb = consultasService.listarConsultasDb();
             System.out.println("---- Consultas da base de dados: ---- ");
             callListConsultas(listaConsultasDb);
-        } else {
-            if(option == 1){
-                List<Consultas> listaConsultas = consultasService.listarConsultas();
-                System.out.println("---- Consultas armazenadas localmente: ----");
-                callListConsultas(listaConsultas);
-            } else if (option == 2) {
-                List<Consultas> listaConsultasDb = consultasService.listarConsultasDb();
-                System.out.println("---- Consultas da base de dados: ---- ");
-                callListConsultas(listaConsultasDb);
-            }
-        }
-
     }
 
     public void removerConsulta(Long id){

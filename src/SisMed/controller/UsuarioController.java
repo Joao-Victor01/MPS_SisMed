@@ -1,21 +1,36 @@
 package SisMed.controller;
 
+import SisMed.model.Usuario;
+import SisMed.service.UsuarioService;
 import SisMed.interfaces.LoginFacadeInterface;
 
 public class UsuarioController {
-    private final LoginFacadeInterface loginFacadeInterface;
+    private UsuarioService usuarioService;
+    private LoginFacadeInterface loginFacade;
 
-    public UsuarioController(LoginFacadeInterface loginFacadeInterface) {
-        this.loginFacadeInterface = loginFacadeInterface;
+    public UsuarioController(UsuarioService usuarioService, LoginFacadeInterface loginFacade) {
+        this.usuarioService = usuarioService;
+        this.loginFacade = loginFacade;
     }
 
-    public boolean loginUsuario(Integer userType, String userName, String senha) {
-        if (loginFacadeInterface.login(userType, userName, senha)) {
-            System.out.println("Login efetuado!");
-            return true;
-        } else {
-            System.out.println("Login falhou! Verifique suas credenciais.");
-            return false;
+    public void cadastrarUsuario(Usuario usuario) {
+        usuarioService.cadastrarUsuario(usuario);
+    }
+
+    public boolean loginUsuario(int tipoUsuario, String userName, String senha) {
+        return loginFacade.login(tipoUsuario, userName, senha);
+    }
+
+    public void listarUsuarios() {
+
+        if (usuarioService.listarUsuarios().isEmpty()){
+            System.out.println("Nenhum usuário cadastrado!");
+        }else {
+            usuarioService.listarUsuarios().forEach(usuario -> {
+                System.out.println("Nome: " + usuario.getNome());
+                System.out.println("Tipo de Usuário: " + usuario.getTipoUsuario());
+                System.out.println("-----------------------------------");
+            });
         }
     }
 }
