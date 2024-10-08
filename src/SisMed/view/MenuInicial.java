@@ -23,7 +23,8 @@ public class MenuInicial {
             System.out.println("1. Cadastrar novo Usuário");
             System.out.println("2. Listar todos os Usuários");
             System.out.println("3. Fazer login");
-            System.out.println("4. Sair");
+            System.out.println("4. Login via OAuth (Google/Facebook)");
+            System.out.println("5. Sair");
             System.out.println();
 
             int opcao = scanner.nextInt();
@@ -40,6 +41,9 @@ public class MenuInicial {
                     menuLogin.login();
                     break;
                 case 4:
+                    menuLogin.loginOAuth();
+                    break;
+                case 5:
                     System.out.println("Saindo do sistema.");
                     return;
                 default:

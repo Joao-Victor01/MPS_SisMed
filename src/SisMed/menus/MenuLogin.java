@@ -34,4 +34,24 @@ public class MenuLogin {
             System.out.println("Login falhou! Verifique suas credenciais.");
         }
     }
+
+    public void loginOAuth() {
+
+        System.out.println("Digite o nome de usuário:");
+        String userName = scanner.nextLine();
+        System.out.println("Digite a senha:");
+        String senha = scanner.nextLine();
+
+        boolean loginSucesso = usuarioController.loginUsuario(4, userName, senha);
+
+        //apenas uma simulação de um login com o google/facebook para demonstrar o adapter
+        if (loginSucesso) {
+            System.out.println("Login OAuth realizado com sucesso!");
+            System.exit(0);
+        } else {
+            System.out.println("Falha no login. Tente novamente.");
+            System.exit(0);
+        }
+    }
+
 }

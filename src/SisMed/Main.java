@@ -17,12 +17,15 @@ import SisMed.service.ConsultasService;
 import SisMed.service.UsuarioService;
 import SisMed.menus.MenuLoginEfetuado;
 import SisMed.view.MenuInicial;
+import SisMed.adapter.OAuthService;
+import SisMed.adapter.OAuthAdapter;
 
 import java.sql.SQLException;
 
 public class Main {
 
     public static void main(String[] args) throws SQLException {
+
         // 1. Inicializar o DatabaseConnectionManager
         DatabaseConnectionManager dbManager = new DatabaseConnectionManager("jdbc:h2:mem:SisMedDB", "user", "");
         H2Database database = new H2Database();
@@ -43,6 +46,10 @@ public class Main {
         loginFacade.registrarLoginStrategy(1, new MedicoLoginStrategy(usuarioService));
         loginFacade.registrarLoginStrategy(2, new PacienteLoginStrategy(usuarioService));
         loginFacade.registrarLoginStrategy(3, new AdminLoginStrategy(usuarioService));
+
+        //Simulacao de login OAuth
+        OAuthService oauthService = new OAuthService();
+        loginFacade.registrarLoginStrategy(4, new OAuthAdapter(oauthService));
 
         // 5. Criar a UsuarioController e ConsultasController
         UsuarioController usuarioController = new UsuarioController(usuarioService, loginFacade);
