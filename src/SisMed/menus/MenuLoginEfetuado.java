@@ -79,7 +79,7 @@ public class MenuLoginEfetuado {
                     menuChoicesConsultas.cadastrarConsulta();
                     break;
                 case 3:
-                    menuChoicesConsultas.listarTodasConsultas();
+                    menuChoicesConsultas.listarConsultas();
                     break;
                 case 4:
                     menuChoicesConsultas.atualizarConsulta();

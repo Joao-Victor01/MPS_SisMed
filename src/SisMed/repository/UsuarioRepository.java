@@ -56,7 +56,7 @@ public class UsuarioRepository implements UsuarioRepositoryInterface{
                 pstmt.setNull(12, Types.VARCHAR);
             }
             pstmt.executeUpdate();
-            System.out.println("Usuário" + usuario + " cadastrado com sucesso!");
+            System.out.println("Usuário cadastrado com sucesso!");
 
         } catch (SQLException e) {
             e.printStackTrace();

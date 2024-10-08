@@ -6,7 +6,7 @@ import SisMed.repository.UsuarioRepositoryInterface;
 import java.util.List;
 
 public class UsuarioService {
-    private UsuarioRepositoryInterface usuarioRepository;
+    private final UsuarioRepositoryInterface usuarioRepository;
 
     public UsuarioService(UsuarioRepositoryInterface usuarioRepository) {
         this.usuarioRepository = usuarioRepository;

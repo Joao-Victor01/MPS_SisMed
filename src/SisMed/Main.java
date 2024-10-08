@@ -1,44 +1,62 @@
 package SisMed;
 
+import SisMed.controller.ConsultasController;
 import SisMed.controller.UsuarioController;
 import SisMed.database.DatabaseConnectionManager;
+import SisMed.database.H2Database;
 import SisMed.interfaces.LoginFacadeInterfaceImpl;
 import SisMed.login.AdminLoginStrategy;
 import SisMed.login.MedicoLoginStrategy;
 import SisMed.login.PacienteLoginStrategy;
-import SisMed.repository.UsuarioRepository;
-import SisMed.repository.UsuarioRepositoryInterface;
-import SisMed.service.UsuarioService;
 import SisMed.menus.MenuAcoes;
+import SisMed.menus.MenuChoicesConsultas;
+import SisMed.menus.MenuLogin;
+import SisMed.repository.ConsultasRepository;
+import SisMed.repository.UsuarioRepository;
+import SisMed.service.ConsultasService;
+import SisMed.service.UsuarioService;
 import SisMed.menus.MenuLoginEfetuado;
+import SisMed.view.MenuInicial;
+
+import java.sql.SQLException;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
         // 1. Inicializar o DatabaseConnectionManager
         DatabaseConnectionManager dbManager = new DatabaseConnectionManager("jdbc:h2:mem:SisMedDB", "user", "");
+        H2Database database = new H2Database();
+        database.connect();
+        database.criarTabelaUsuarios();
+        database.criarTabelaConsultas();
 
-        // 2. Criar a UsuarioRepository usando o DatabaseConnectionManager
-        UsuarioRepositoryInterface usuarioRepository = new UsuarioRepository(dbManager);
+        // 2. Criar as Repositories usando o DatabaseConnectionManager
+        UsuarioRepository usuarioRepository = new UsuarioRepository(dbManager);
+        ConsultasRepository consultasRepository = new ConsultasRepository(dbManager);
 
-        // 3. Criar a UsuarioService usando a UsuarioRepository
+        // 3. Criar a UsuarioService e ConsultasService
         UsuarioService usuarioService = new UsuarioService(usuarioRepository);
+        ConsultasService consultasService = new ConsultasService(consultasRepository);
 
         // 4. Criar a LoginFacadeInterfaceImpl e registrar as estratégias de login
         LoginFacadeInterfaceImpl loginFacade = new LoginFacadeInterfaceImpl();
-        loginFacade.registrarLoginStrategy(1, new MedicoLoginStrategy(usuarioService)); // Passando UsuarioService
-        loginFacade.registrarLoginStrategy(2, new PacienteLoginStrategy(usuarioService)); // Passando UsuarioService
-        loginFacade.registrarLoginStrategy(3, new AdminLoginStrategy(usuarioService)); // Passando UsuarioService
+        loginFacade.registrarLoginStrategy(1, new MedicoLoginStrategy(usuarioService));
+        loginFacade.registrarLoginStrategy(2, new PacienteLoginStrategy(usuarioService));
+        loginFacade.registrarLoginStrategy(3, new AdminLoginStrategy(usuarioService));
 
-        // 5. Criar a UsuarioController usando a UsuarioService e a LoginFacade
+        // 5. Criar a UsuarioController e ConsultasController
         UsuarioController usuarioController = new UsuarioController(usuarioService, loginFacade);
+        ConsultasController consultasController = new ConsultasController(consultasService);
 
-        // 6. Inicializar outros componentes conforme necessário (por exemplo, menus)
+        // 6. Inicializar Menus
+        MenuChoicesConsultas menuChoicesConsultas = new MenuChoicesConsultas(consultasController);
         MenuAcoes menuAcoes = new MenuAcoes(usuarioController);
-        MenuLoginEfetuado menuLoginEfetuado = new MenuLoginEfetuado(usuarioController);
+        MenuLoginEfetuado menuLoginEfetuado = new MenuLoginEfetuado(usuarioService, menuChoicesConsultas);
+        MenuLogin menuLogin = new MenuLogin(usuarioController, menuLoginEfetuado);
+        MenuInicial menuInicial = new MenuInicial(menuAcoes, menuLogin);
 
-        // Aqui você pode adicionar a lógica para exibir o menu ou iniciar o sistema
-        menuAcoes.exibirMenu(); // Supondo que você tenha um método para exibir o menu
+        // 7. Exibir o menu principal
+        menuInicial.exibirMenu();
 
         // Desconectar do banco de dados ao final
         dbManager.closeConnection(dbManager.getConnection());
