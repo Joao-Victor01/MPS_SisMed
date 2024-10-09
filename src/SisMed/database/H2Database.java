@@ -1,9 +1,6 @@
 package SisMed.database;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 public class H2Database {
     private Connection connection;
@@ -69,6 +66,34 @@ public class H2Database {
         try (Statement stmt = connection.createStatement()) {
             stmt.execute(sql);
             System.out.println("Tabela Consultas criada com sucesso.");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void criarTabelaAccessUsers() {
+        String sql = "CREATE TABLE IF NOT EXISTS Access_user (" +
+                "id BIGINT AUTO_INCREMENT PRIMARY KEY, " +
+                "tipo_usuario BIGINT NOT NULL, " +
+                "userName VARCHAR(12) NOT NULL, " +
+                "data_acesso DATETIME NOT NULL" + // Removida a vírgula aqui
+                ");";
+        try (Statement stmt = connection.createStatement()) {
+            stmt.execute(sql);
+            System.out.println("Tabela Access_user criada com sucesso.");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void registrarAcesso(int tipoUsuario, String nomeUsuario) {
+        String sql = "INSERT INTO access_user (tipo_usuario, userName, data_acesso) VALUES (?, ?, NOW())";
+
+        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            pstmt.setInt(1, tipoUsuario);
+            pstmt.setString(2, nomeUsuario);
+            pstmt.executeUpdate();
+            System.out.println("Acesso registrado com sucesso.");
         } catch (SQLException e) {
             e.printStackTrace();
         }

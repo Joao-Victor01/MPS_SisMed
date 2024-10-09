@@ -3,6 +3,7 @@ package SisMed.view;
 import SisMed.menus.MenuAcoes;
 import SisMed.menus.MenuLogin;
 
+import java.sql.SQLException;
 import java.util.Scanner;
 
 public class MenuInicial {
@@ -16,7 +17,7 @@ public class MenuInicial {
         this.menuLogin = menuLogin;
     }
 
-    public void exibirMenu() {
+    public void exibirMenu() throws SQLException {
         while (true) {
             System.out.println("===== Sistema de Gestão Médica =====");
             System.out.println("Escolha uma opção:");

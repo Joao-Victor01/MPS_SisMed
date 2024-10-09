@@ -6,6 +6,7 @@ import SisMed.model.Paciente;
 import SisMed.model.Usuario;
 import SisMed.service.UsuarioService;
 
+import java.sql.SQLException;
 import java.util.Scanner;
 
 public class MenuLoginEfetuado {
@@ -18,7 +19,7 @@ public class MenuLoginEfetuado {
         this.menuChoicesConsultas = menuChoicesConsultas;
     }
 
-    public void boasVindas(String userName) {
+    public void boasVindas(String userName) throws SQLException {
         Usuario usuario = usuarioService.filtrarUsuarioPorUserName(userName);
         if (usuario != null) {
             System.out.println("Olá, " + usuario.getNome() + "!\nO que deseja fazer?");
@@ -28,7 +29,7 @@ public class MenuLoginEfetuado {
         }
     }
 
-    private void exibirMenuPorTipoUsuario(Usuario usuario) {
+    private void exibirMenuPorTipoUsuario(Usuario usuario) throws SQLException {
         if (usuario instanceof Medico) {
             System.out.println("1. Visualizar agenda;");
             // TODO: implementar outras opções do médico
@@ -37,7 +38,9 @@ public class MenuLoginEfetuado {
             System.out.println("2. Desmarcar consulta;");
             System.out.println("3. Ver minhas consultas marcadas;");
             System.out.println("4. Atualizar consulta;");
-            System.out.println("5. Sair;");
+            System.out.println("5. Visualizar relatório de acesso em pdf;");
+            System.out.println("6. Visualizar relatório de acesso em html;");
+            System.out.println("7. Sair;");
 
             int opcao = scanner.nextInt();
             scanner.nextLine();
@@ -56,6 +59,12 @@ public class MenuLoginEfetuado {
                     menuChoicesConsultas.atualizarConsulta();
                     break;
                 case 5:
+                    menuChoicesConsultas.gerarRelatorio();
+                    break;
+                case 6:
+                    menuChoicesConsultas.gerarRelatorioHtml();
+                    break;
+                case 7:
                     System.out.println("Saindo...");
                     break;
                 default:

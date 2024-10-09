@@ -1,7 +1,11 @@
 package SisMed.menus;
 
 import SisMed.controller.ConsultasController;
+import SisMed.service.relatorios.RelatorioHTML;
+import SisMed.service.relatorios.RelatorioPDF;
+import SisMed.service.relatorios.RelatorioService;
 
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.Scanner;
 
@@ -56,4 +60,14 @@ public class MenuChoicesConsultas {
 
         consultasController.removerConsulta(idConsulta);
     }
+
+    public void gerarRelatorio() throws SQLException {
+        RelatorioPDF relatorioPDF = new RelatorioPDF();
+        relatorioPDF.formatarRelatorio();
+    }
+    public void gerarRelatorioHtml() throws SQLException {
+        RelatorioHTML relatorioHTML = new RelatorioHTML();
+        relatorioHTML.formatarRelatorio();
+    }
+
 }

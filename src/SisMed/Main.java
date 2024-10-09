@@ -32,6 +32,7 @@ public class Main {
         database.connect();
         database.criarTabelaUsuarios();
         database.criarTabelaConsultas();
+        database.criarTabelaAccessUsers();
 
         // 2. Criar as Repositories usando o DatabaseConnectionManager
         UsuarioRepository usuarioRepository = new UsuarioRepository(dbManager);
@@ -52,7 +53,7 @@ public class Main {
         loginFacade.registrarLoginStrategy(4, new OAuthAdapter(oauthService));
 
         // 5. Criar a UsuarioController e ConsultasController
-        UsuarioController usuarioController = new UsuarioController(usuarioService, loginFacade);
+        UsuarioController usuarioController = new UsuarioController(usuarioService, loginFacade, database);
         ConsultasController consultasController = new ConsultasController(consultasService);
 
         // 6. Inicializar Menus

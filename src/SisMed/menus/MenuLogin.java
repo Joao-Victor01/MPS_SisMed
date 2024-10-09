@@ -2,6 +2,7 @@ package SisMed.menus;
 
 import SisMed.controller.UsuarioController;
 
+import java.sql.SQLException;
 import java.util.Scanner;
 
 public class MenuLogin {
@@ -14,7 +15,7 @@ public class MenuLogin {
         this.menuLoginEfetuado = menuLoginEfetuado;
     }
 
-    public void login() {
+    public void login() throws SQLException {
         System.out.println("Escolha uma opção:");
         System.out.println("\t1. Login Médico;\n\t2. Login Paciente;\n\t3. Login Administrador");
 

@@ -21,6 +21,7 @@ public class LoginFacadeInterfaceImpl implements LoginFacadeInterface {
         if (strategy == null) {
             throw new IllegalArgumentException("Tipo de usuário inválido.");
         }
+
         return strategy.login(userName, senha);
     }
 }
