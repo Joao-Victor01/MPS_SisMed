@@ -32,7 +32,7 @@ public class MenuLoginEfetuado {
     private void exibirMenuPorTipoUsuario(Usuario usuario) throws SQLException {
         if (usuario instanceof Medico) {
             System.out.println("1. Visualizar agenda;");
-            // TODO: implementar outras opções do médico
+            // TODO: implementar opções do médico
         } else if (usuario instanceof Paciente) {
             System.out.println("1. Marcar consulta;");
             System.out.println("2. Desmarcar consulta;");

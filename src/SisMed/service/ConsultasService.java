@@ -2,6 +2,7 @@ package SisMed.service;
 
 import SisMed.exception.DadosConsultaInvalidosException;
 import SisMed.model.Consultas;
+import SisMed.model.Usuario;
 import SisMed.repository.ConsultasRepositoryInterface;
 
 import java.time.LocalDate;

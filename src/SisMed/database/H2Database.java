@@ -9,8 +9,8 @@ public class H2Database {
         try {
             connection = DriverManager.getConnection("jdbc:h2:mem:SisMedDB", "user", "");
             System.out.println("Conectado ao banco de dados.");
-            criarTabelaUsuarios(); // Chama para criar a tabela de usuários
-            criarTabelaConsultas(); // Chama para criar a tabela de consultas
+            criarTabelaUsuarios();
+            criarTabelaConsultas();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -61,8 +61,8 @@ public class H2Database {
                 "cpfMedico VARCHAR(11) NOT NULL, " +
                 "dataConsulta DATE NOT NULL, " +
                 "descricao VARCHAR(500), " +
-                "FOREIGN KEY (cpfPaciente) REFERENCES Usuarios(cpf), " + // Corrigido para referenciar Usuarios
-                "FOREIGN KEY (cpfMedico) REFERENCES Usuarios(cpf));"; // Corrigido para referenciar Usuarios
+                "FOREIGN KEY (cpfPaciente) REFERENCES Usuarios(cpf), " +
+                "FOREIGN KEY (cpfMedico) REFERENCES Usuarios(cpf));";
         try (Statement stmt = connection.createStatement()) {
             stmt.execute(sql);
             System.out.println("Tabela Consultas criada com sucesso.");
@@ -76,7 +76,7 @@ public class H2Database {
                 "id BIGINT AUTO_INCREMENT PRIMARY KEY, " +
                 "tipo_usuario BIGINT NOT NULL, " +
                 "userName VARCHAR(12) NOT NULL, " +
-                "data_acesso DATETIME NOT NULL" + // Removida a vírgula aqui
+                "data_acesso DATETIME NOT NULL" +
                 ");";
         try (Statement stmt = connection.createStatement()) {
             stmt.execute(sql);

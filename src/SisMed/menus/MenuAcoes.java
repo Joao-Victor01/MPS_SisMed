@@ -1,20 +1,25 @@
 package SisMed.menus;
 
+import SisMed.command.CadastrarUsuarioCommand;
+import SisMed.command.ListarUsuariosCommand;
 import SisMed.controller.UsuarioController;
 import SisMed.model.Admin;
 import SisMed.model.Medico;
 import SisMed.model.Paciente;
 import SisMed.model.Usuario;
+import SisMed.service.UsuarioService;
 
 import java.time.LocalDate;
 import java.util.Scanner;
 
 public class MenuAcoes {
     private UsuarioController usuarioController;
+    private UsuarioService usuarioService;
     private Scanner scanner = new Scanner(System.in);
 
-    public MenuAcoes(UsuarioController usuarioController) {
+    public MenuAcoes(UsuarioService usuarioService) {
         this.usuarioController = usuarioController;
+        this.usuarioService = usuarioService;
     }
 
     public void cadastrarUsuario() {
@@ -101,10 +106,12 @@ public class MenuAcoes {
                 return;
         }
 
-        usuarioController.cadastrarUsuario(usuario);
+        CadastrarUsuarioCommand cadastrarUsuarioCommand = new CadastrarUsuarioCommand(usuarioService, usuario);
+        cadastrarUsuarioCommand.execute();
     }
 
     public void listarUsuarios() {
-        usuarioController.listarUsuarios();
+        ListarUsuariosCommand listarUsuariosCommand = new ListarUsuariosCommand(usuarioService);
+        listarUsuariosCommand.execute();
     }
 }

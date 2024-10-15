@@ -22,12 +22,20 @@ import SisMed.menus.MenuLoginEfetuado;
 import SisMed.view.MenuInicial;
 import SisMed.adapter.OAuthService;
 import SisMed.adapter.OAuthAdapter;
+import org.h2.tools.Server;
 
 import java.sql.SQLException;
 
 public class Main {
 
     public static void main(String[] args) throws SQLException {
+
+        // Inicia o console web H2
+        Server h2Server = Server.createWebServer("-web", "-webAllowOthers", "-webPort", "8082").start();
+
+        // Mensagem para acessar o console
+        System.out.println("Console web do H2 iniciado em: http://localhost:8082");
+
 
         // 1. Inicializar o DatabaseConnectionManager
         DatabaseConnectionManager dbManager = new DatabaseConnectionManager("jdbc:h2:mem:SisMedDB", "user", "");
@@ -63,8 +71,8 @@ public class Main {
         RelatorioController relatorioController = new RelatorioController(relatorioService);
 
         // 6. Inicializar Menus
-        MenuChoicesConsultas menuChoicesConsultas = new MenuChoicesConsultas(consultasController, relatorioController);
-        MenuAcoes menuAcoes = new MenuAcoes(usuarioController);
+        MenuChoicesConsultas menuChoicesConsultas = new MenuChoicesConsultas(consultasController, relatorioController, consultasService);
+        MenuAcoes menuAcoes = new MenuAcoes(usuarioService);
         MenuLoginEfetuado menuLoginEfetuado = new MenuLoginEfetuado(usuarioService, menuChoicesConsultas);
         MenuLogin menuLogin = new MenuLogin(usuarioController, menuLoginEfetuado, relatorioController);
         MenuInicial menuInicial = new MenuInicial(menuAcoes, menuLogin);
