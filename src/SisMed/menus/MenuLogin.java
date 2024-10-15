@@ -1,5 +1,6 @@
 package SisMed.menus;
 
+import SisMed.controller.RelatorioController;
 import SisMed.controller.UsuarioController;
 
 import java.sql.SQLException;
@@ -9,10 +10,12 @@ public class MenuLogin {
     private Scanner scanner = new Scanner(System.in);
     private UsuarioController usuarioController;
     private MenuLoginEfetuado menuLoginEfetuado;
+    private RelatorioController relatorioController;
 
-    public MenuLogin(UsuarioController usuarioController, MenuLoginEfetuado menuLoginEfetuado) {
+    public MenuLogin(UsuarioController usuarioController, MenuLoginEfetuado menuLoginEfetuado, RelatorioController relatorioController) {
         this.usuarioController = usuarioController;
         this.menuLoginEfetuado = menuLoginEfetuado;
+        this.relatorioController = relatorioController;
     }
 
     public void login() throws SQLException {
@@ -30,6 +33,7 @@ public class MenuLogin {
 
         if (usuarioController.loginUsuario(opcao, userName, senha)) {
             System.out.println("Login efetuado com sucesso!");
+            relatorioController.registrarAcesso(opcao, userName);
             menuLoginEfetuado.boasVindas(userName);
         } else {
             System.out.println("Login falhou! Verifique suas credenciais.");

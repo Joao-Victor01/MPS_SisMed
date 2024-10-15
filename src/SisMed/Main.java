@@ -1,6 +1,7 @@
 package SisMed;
 
 import SisMed.controller.ConsultasController;
+import SisMed.controller.RelatorioController;
 import SisMed.controller.UsuarioController;
 import SisMed.database.DatabaseConnectionManager;
 import SisMed.database.H2Database;
@@ -12,8 +13,10 @@ import SisMed.menus.MenuAcoes;
 import SisMed.menus.MenuChoicesConsultas;
 import SisMed.menus.MenuLogin;
 import SisMed.repository.ConsultasRepository;
+import SisMed.repository.RelatorioRepository;
 import SisMed.repository.UsuarioRepository;
 import SisMed.service.ConsultasService;
+import SisMed.service.RelatorioService;
 import SisMed.service.UsuarioService;
 import SisMed.menus.MenuLoginEfetuado;
 import SisMed.view.MenuInicial;
@@ -37,10 +40,12 @@ public class Main {
         // 2. Criar as Repositories usando o DatabaseConnectionManager
         UsuarioRepository usuarioRepository = new UsuarioRepository(dbManager);
         ConsultasRepository consultasRepository = new ConsultasRepository(dbManager);
+        RelatorioRepository relatorioRepository =  new RelatorioRepository(dbManager);
 
         // 3. Criar a UsuarioService e ConsultasService
         UsuarioService usuarioService = new UsuarioService(usuarioRepository);
         ConsultasService consultasService = new ConsultasService(consultasRepository);
+        RelatorioService relatorioService = new RelatorioService(relatorioRepository);
 
         // 4. Criar a LoginFacadeInterfaceImpl e registrar as estratégias de login
         LoginFacadeInterfaceImpl loginFacade = new LoginFacadeInterfaceImpl();
@@ -53,14 +58,15 @@ public class Main {
         loginFacade.registrarLoginStrategy(4, new OAuthAdapter(oauthService));
 
         // 5. Criar a UsuarioController e ConsultasController
-        UsuarioController usuarioController = new UsuarioController(usuarioService, loginFacade, database);
+        UsuarioController usuarioController = new UsuarioController(usuarioService, loginFacade);
         ConsultasController consultasController = new ConsultasController(consultasService);
+        RelatorioController relatorioController = new RelatorioController(relatorioService);
 
         // 6. Inicializar Menus
-        MenuChoicesConsultas menuChoicesConsultas = new MenuChoicesConsultas(consultasController);
+        MenuChoicesConsultas menuChoicesConsultas = new MenuChoicesConsultas(consultasController, relatorioController);
         MenuAcoes menuAcoes = new MenuAcoes(usuarioController);
         MenuLoginEfetuado menuLoginEfetuado = new MenuLoginEfetuado(usuarioService, menuChoicesConsultas);
-        MenuLogin menuLogin = new MenuLogin(usuarioController, menuLoginEfetuado);
+        MenuLogin menuLogin = new MenuLogin(usuarioController, menuLoginEfetuado, relatorioController);
         MenuInicial menuInicial = new MenuInicial(menuAcoes, menuLogin);
 
         // 7. Exibir o menu principal

@@ -59,7 +59,7 @@ public class MenuLoginEfetuado {
                     menuChoicesConsultas.atualizarConsulta();
                     break;
                 case 5:
-                    menuChoicesConsultas.gerarRelatorio();
+                    menuChoicesConsultas.gerarRelatorioPdf();
                     break;
                 case 6:
                     menuChoicesConsultas.gerarRelatorioHtml();

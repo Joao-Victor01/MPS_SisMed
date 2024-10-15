@@ -72,7 +72,7 @@ public class H2Database {
     }
 
     public void criarTabelaAccessUsers() {
-        String sql = "CREATE TABLE IF NOT EXISTS Access_user (" +
+        String sql = "CREATE TABLE IF NOT EXISTS Relatorio (" +
                 "id BIGINT AUTO_INCREMENT PRIMARY KEY, " +
                 "tipo_usuario BIGINT NOT NULL, " +
                 "userName VARCHAR(12) NOT NULL, " +
@@ -80,22 +80,10 @@ public class H2Database {
                 ");";
         try (Statement stmt = connection.createStatement()) {
             stmt.execute(sql);
-            System.out.println("Tabela Access_user criada com sucesso.");
+            System.out.println("Tabela Relatorio criada com sucesso.");
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public void registrarAcesso(int tipoUsuario, String nomeUsuario) {
-        String sql = "INSERT INTO access_user (tipo_usuario, userName, data_acesso) VALUES (?, ?, NOW())";
-
-        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
-            pstmt.setInt(1, tipoUsuario);
-            pstmt.setString(2, nomeUsuario);
-            pstmt.executeUpdate();
-            System.out.println("Acesso registrado com sucesso.");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
 }
