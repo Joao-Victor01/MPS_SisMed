@@ -1,14 +1,26 @@
 package SisMed.model;
 
-public class RelatorioAcesso {
+public class Relatorio {
     private long tipoUsuario;
     private String userName;
     private String dataAcesso;
 
     // Construtor
-    public RelatorioAcesso(long tipoUsuario, String userName, String dataAcesso) {
+//    public Relatorio(long tipoUsuario, String userName, String dataAcesso) {
+//        this.tipoUsuario = tipoUsuario;
+//        this.userName = userName;
+//        this.dataAcesso = dataAcesso;
+//    }
+
+    public void setTipoUsuario(long tipoUsuario) {
         this.tipoUsuario = tipoUsuario;
+    }
+
+    public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    public void setDataAcesso(String dataAcesso) {
         this.dataAcesso = dataAcesso;
     }
 
