@@ -22,10 +22,11 @@ public class MenuInicial {
             System.out.println("===== Sistema de Gestão Médica =====");
             System.out.println("Escolha uma opção:");
             System.out.println("1. Cadastrar novo Usuário");
-            System.out.println("2. Listar todos os Usuários");
-            System.out.println("3. Fazer login");
-            System.out.println("4. Login via OAuth (Google/Facebook)");
-            System.out.println("5. Sair");
+            System.out.println("2. Atualizar dados do Usuário");
+            System.out.println("3. Listar todos os Usuários");
+            System.out.println("4. Fazer login");
+            System.out.println("5. Login via OAuth (Google/Facebook)");
+            System.out.println("6. Sair");
             System.out.println();
 
             int opcao = scanner.nextInt();
@@ -36,15 +37,18 @@ public class MenuInicial {
                     menuAcoes.cadastrarUsuario();
                     break;
                 case 2:
-                    menuAcoes.listarUsuarios();
+                    menuAcoes.atualizarUsuario();
                     break;
                 case 3:
-                    menuLogin.login();
+                    menuAcoes.listarUsuarios();
                     break;
                 case 4:
-                    menuLogin.loginOAuth();
+                    menuLogin.login();
                     break;
                 case 5:
+                    menuLogin.loginOAuth();
+                    break;
+                case 6:
                     System.out.println("Saindo do sistema.");
                     return;
                 default:

@@ -64,6 +64,46 @@ public class UsuarioRepository implements UsuarioRepositoryInterface{
     }
 
     @Override
+    public void atualizar(Usuario usuario) {
+        String sql = "UPDATE Usuarios SET nome = ?, endereco = ?, sexo = ?, dataNascimento = ?, userName = ?, senha = ?, tipoUsuario = ?, crm = ?, especializacoes = ?, ficha = ?, historicoMedico = ? WHERE cpf = ?";
+
+        try (Connection connection = connectionManager.getConnection();
+             PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            pstmt.setString(1, usuario.getNome());
+            pstmt.setString(2, usuario.getEndereco());
+            pstmt.setString(3, usuario.getSexo());
+            pstmt.setDate(4, Date.valueOf(usuario.getDataNascimento()));
+            pstmt.setString(5, usuario.getUserName());
+            pstmt.setString(6, usuario.getSenha());
+            pstmt.setInt(7, obterTipoUsuario(usuario));
+
+            // Campos específicos
+            if (usuario instanceof Medico) {
+                pstmt.setString(8, ((Medico) usuario).getCrm());
+                pstmt.setString(9, ((Medico) usuario).getEspecializacoes());
+                pstmt.setNull(10, Types.VARCHAR);
+                pstmt.setNull(11, Types.VARCHAR);
+            } else if (usuario instanceof Paciente) {
+                pstmt.setNull(8, Types.VARCHAR);
+                pstmt.setNull(9, Types.VARCHAR);
+                pstmt.setString(10, ((Paciente) usuario).getFicha());
+                pstmt.setString(11, ((Paciente) usuario).getHistoricoMedico());
+            } else { // Admin
+                pstmt.setNull(8, Types.VARCHAR);
+                pstmt.setNull(9, Types.VARCHAR);
+                pstmt.setNull(10, Types.VARCHAR);
+                pstmt.setNull(11, Types.VARCHAR);
+            }
+            pstmt.setLong(12, usuario.getCpf()); // Usando CPF como condição para a atualização
+            pstmt.executeUpdate();
+            System.out.println("Usuário atualizado com sucesso!");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    @Override
     public boolean loginUsuario(String userName, String senha) {
         String sql = "SELECT * FROM Usuarios WHERE userName = ? AND senha = ?";
         try (Connection connection = connectionManager.getConnection();
