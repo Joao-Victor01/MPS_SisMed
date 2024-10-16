@@ -1,5 +1,7 @@
 package SisMed.model;
 
+import SisMed.memento.UsuarioMemento;
+
 import java.time.LocalDate;
 
 public abstract class Usuario {
@@ -68,4 +70,18 @@ public abstract class Usuario {
     }
 
     public abstract Integer getTipoUsuario();
+
+    public UsuarioMemento saveToMemento() {
+        return new UsuarioMemento(this);
+    }
+
+    public void restoreFromMemento(UsuarioMemento memento) {
+        this.nome = memento.getNome();
+        this.cpf = memento.getCpf();
+        this.endereco = memento.getEndereco();
+        this.sexo = memento.getSexo();
+        this.dataNascimento = memento.getDataNascimento();
+        this.userName = memento.getUserName();
+        this.senha = memento.getSenha();
+    }
 }
