@@ -7,7 +7,7 @@ public class H2Database {
 
     public void connect() {
         try {
-            connection = DriverManager.getConnection("jdbc:h2:mem:SisMedDB", "user", "");
+            connection = DriverManager.getConnection("jdbc:h2:mem:SisMedDB", "user", "root");
             System.out.println("Conectado ao banco de dados.");
             criarTabelaUsuarios();
             criarTabelaConsultas();

@@ -47,4 +47,16 @@ public class ConsultasService {
         }
     }
 
+    public void confirmarConsulta(Consultas consulta) {
+        consulta.confirmar();
+    }
+
+    public void cancelarConsulta(Consultas consulta) {
+        consulta.cancelar();
+    }
+
+    public void concluirConsulta(Consultas consulta) {
+        consulta.concluir();
+    }
+
 }

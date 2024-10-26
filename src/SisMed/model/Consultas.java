@@ -1,6 +1,10 @@
 package SisMed.model;
 
+import SisMed.state.ConsultaAgendada;
+import SisMed.state.EstadoConsulta;
+
 import java.time.LocalDate;
+
 
 public class Consultas {
 
@@ -9,6 +13,11 @@ public class Consultas {
     private Long cpfMedico;
     private LocalDate dataConsulta;
     private String descricao;
+    private EstadoConsulta estado;
+
+    public Consultas() {
+        this.estado = new ConsultaAgendada(); // Estado inicial
+    }
 
     // Getters e Setters
     public Long getId() {
@@ -50,6 +59,22 @@ public class Consultas {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    public void confirmar() {
+        estado.confirmar(this);
+    }
+
+    public void cancelar() {
+        estado.cancelar(this);
+    }
+
+    public void concluir() {
+        estado.concluir(this);
+    }
+
+    public void setEstado(EstadoConsulta estado) {
+        this.estado = estado;
     }
 
 }

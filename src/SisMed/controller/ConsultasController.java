@@ -63,4 +63,16 @@ public class ConsultasController {
     public void removerConsulta(Long id) {
             consultasService.removerConsulta(id);
     }
+
+    public void confirmarConsulta(Consultas consulta) {
+        consultasService.confirmarConsulta(consulta);
+    }
+
+    public void cancelarConsulta(Consultas consulta) {
+        consultasService.cancelarConsulta(consulta);
+    }
+
+    public void concluirConsulta(Consultas consulta) {
+        consultasService.concluirConsulta(consulta);
+    }
 }

@@ -38,7 +38,7 @@ public class Main {
 
 
         // 1. Inicializar o DatabaseConnectionManager
-        DatabaseConnectionManager dbManager = new DatabaseConnectionManager("jdbc:h2:mem:SisMedDB", "user", "");
+        DatabaseConnectionManager dbManager = new DatabaseConnectionManager("jdbc:h2:mem:SisMedDB", "user", "root");
         H2Database database = new H2Database();
         database.connect();
         database.criarTabelaUsuarios();
