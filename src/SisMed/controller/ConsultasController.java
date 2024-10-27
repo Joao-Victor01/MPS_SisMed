@@ -6,6 +6,7 @@ import SisMed.service.ConsultasService;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.Optional;
 
 public class ConsultasController {
     private ConsultasService consultasService;
@@ -61,18 +62,21 @@ public class ConsultasController {
 
 
     public void removerConsulta(Long id) {
-            consultasService.removerConsulta(id);
+        consultasService.removerConsulta(id);
     }
 
-    public void confirmarConsulta(Consultas consulta) {
-        consultasService.confirmarConsulta(consulta);
-    }
-
-    public void cancelarConsulta(Consultas consulta) {
+    public void cancelarConsulta(Long idConsulta) {
+        Consultas consulta = consultasService.consultaPorId(idConsulta);
         consultasService.cancelarConsulta(consulta);
     }
 
-    public void concluirConsulta(Consultas consulta) {
+    public void concluirConsulta(Long idConsulta) {
+        Consultas consulta = consultasService.consultaPorId(idConsulta);
         consultasService.concluirConsulta(consulta);
+    }
+
+    public void agendarConsulta(Long idConsulta) {
+        Consultas consulta = consultasService.consultaPorId(idConsulta);
+        consultasService.agendarConsulta(consulta);
     }
 }

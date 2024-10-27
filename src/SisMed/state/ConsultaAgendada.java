@@ -4,9 +4,8 @@ import SisMed.model.Consultas;
 
 public class ConsultaAgendada implements EstadoConsulta{
     @Override
-    public void confirmar(Consultas consulta) {
-        consulta.setEstado(new ConsultaConfirmada());
-        System.out.println("Consulta confirmada.");
+    public void agendar(Consultas consulta) {
+        System.out.println("Consulta já está agendada.");
     }
 
     @Override
@@ -17,6 +16,7 @@ public class ConsultaAgendada implements EstadoConsulta{
 
     @Override
     public void concluir(Consultas consulta) {
-        System.out.println("Não é possível concluir uma consulta que ainda não foi confirmada.");
+        consulta.setEstado(new ConsultaConcluida());
+        System.out.println("Consulta concluída com sucesso.");
     }
 }

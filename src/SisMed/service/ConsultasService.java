@@ -7,6 +7,7 @@ import SisMed.repository.ConsultasRepositoryInterface;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 public class ConsultasService {
     private final ConsultasRepositoryInterface consultasRepository;
@@ -32,6 +33,10 @@ public class ConsultasService {
         consultasRepository.remover(idConsulta);
     }
 
+    public Consultas consultaPorId(Long idConsulta) {
+        return consultasRepository.consultaPorId(idConsulta);
+    }
+
     private void validarDadosConsulta(Consultas consulta) {
         if (consulta.getDataConsulta() == null) {
             throw new DadosConsultaInvalidosException("A data e hora da consulta são obrigatórias.");
@@ -47,16 +52,16 @@ public class ConsultasService {
         }
     }
 
-    public void confirmarConsulta(Consultas consulta) {
-        consulta.confirmar();
-    }
-
     public void cancelarConsulta(Consultas consulta) {
         consulta.cancelar();
     }
 
     public void concluirConsulta(Consultas consulta) {
         consulta.concluir();
+    }
+
+    public void agendarConsulta(Consultas consulta) {
+        consulta.agendar();
     }
 
 }

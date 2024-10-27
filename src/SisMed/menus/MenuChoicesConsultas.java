@@ -39,7 +39,6 @@ public class MenuChoicesConsultas {
 
         CadastrarConsultaCommand cadastrarConsultaCommand = new CadastrarConsultaCommand(consultasService, cpfPaciente, cpfMedico, dataConsulta, descricao);
         cadastrarConsultaCommand.execute();
-
     }
 
     public void listarConsultas() {
@@ -66,8 +65,15 @@ public class MenuChoicesConsultas {
         System.out.print("ID da Consulta a ser removida: ");
         Long idConsulta = scanner.nextLong();
         scanner.nextLine();
-
+        consultasController.cancelarConsulta(idConsulta);
         consultasController.removerConsulta(idConsulta);
+
+    }
+
+    public void concluirConsulta() {
+        System.out.print("ID da Consulta a ser concluída: ");
+        Long idConsulta = scanner.nextLong();
+        consultasController.concluirConsulta(idConsulta);
     }
 
     public void gerarRelatorioPdf(){

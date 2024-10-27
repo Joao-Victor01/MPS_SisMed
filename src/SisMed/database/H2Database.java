@@ -61,6 +61,7 @@ public class H2Database {
                 "cpfMedico VARCHAR(11) NOT NULL, " +
                 "dataConsulta DATE NOT NULL, " +
                 "descricao VARCHAR(500), " +
+                "estado VARCHAR(50) NOT NULL, " +
                 "FOREIGN KEY (cpfPaciente) REFERENCES Usuarios(cpf), " +
                 "FOREIGN KEY (cpfMedico) REFERENCES Usuarios(cpf));";
         try (Statement stmt = connection.createStatement()) {

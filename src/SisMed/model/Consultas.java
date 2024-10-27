@@ -1,6 +1,8 @@
 package SisMed.model;
 
 import SisMed.state.ConsultaAgendada;
+import SisMed.state.ConsultaCancelada;
+import SisMed.state.ConsultaConcluida;
 import SisMed.state.EstadoConsulta;
 
 import java.time.LocalDate;
@@ -16,7 +18,7 @@ public class Consultas {
     private EstadoConsulta estado;
 
     public Consultas() {
-        this.estado = new ConsultaAgendada(); // Estado inicial
+        this.estado = new ConsultaAgendada();
     }
 
     // Getters e Setters
@@ -61,8 +63,8 @@ public class Consultas {
         this.descricao = descricao;
     }
 
-    public void confirmar() {
-        estado.confirmar(this);
+    public void setEstado(EstadoConsulta estado) {
+        this.estado = estado;
     }
 
     public void cancelar() {
@@ -73,8 +75,8 @@ public class Consultas {
         estado.concluir(this);
     }
 
-    public void setEstado(EstadoConsulta estado) {
-        this.estado = estado;
+    public void agendar() {
+        estado.agendar(this);
     }
 
 }

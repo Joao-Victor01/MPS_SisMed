@@ -2,6 +2,8 @@ package SisMed.repository;
 
 import SisMed.database.DatabaseConnectionManager;
 import SisMed.model.Consultas;
+import SisMed.state.ConsultaAgendada;
+import SisMed.state.ConsultaConcluida;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -89,7 +91,7 @@ public class ConsultasRepository implements ConsultasRepositoryInterface {
     }
 
     @Override
-    public Optional<Consultas> consultaPorId(Long idConsulta) {
+    public Consultas consultaPorId(Long idConsulta) {
         final String sql = "SELECT * FROM Consultas WHERE id = ?";
         try (Connection connection = connectionManager.getConnection();
              PreparedStatement pstmt = connection.prepareStatement(sql)) {
@@ -103,11 +105,12 @@ public class ConsultasRepository implements ConsultasRepositoryInterface {
                 consulta.setCpfPaciente(rs.getLong("cpfPaciente"));
                 consulta.setDataConsulta(rs.getDate("dataConsulta").toLocalDate());
                 consulta.setDescricao(rs.getString("descricao"));
-                return Optional.of(consulta);
+                consulta.setEstado(new ConsultaAgendada());
+                return consulta;
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return Optional.empty();
+        return null;
     }
 }

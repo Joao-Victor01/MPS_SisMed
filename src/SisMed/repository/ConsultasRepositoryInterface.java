@@ -15,5 +15,5 @@ public interface ConsultasRepositoryInterface {
 
     void remover(Long idConsulta);
 
-    Optional<Consultas> consultaPorId(Long idConsulta);
+    Consultas consultaPorId(Long idConsulta);
 }

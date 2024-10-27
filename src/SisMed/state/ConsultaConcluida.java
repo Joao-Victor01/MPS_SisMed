@@ -3,9 +3,10 @@ package SisMed.state;
 import SisMed.model.Consultas;
 
 public class ConsultaConcluida implements EstadoConsulta{
+
     @Override
-    public void confirmar(Consultas consulta) {
-        System.out.println("A consulta já foi concluída e não pode ser confirmada novamente.");
+    public void agendar(Consultas consulta) {
+        System.out.println("Consulta já foi concluída e não pode ser reagendada.");
     }
 
     @Override
