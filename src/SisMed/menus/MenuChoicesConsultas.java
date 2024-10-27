@@ -4,9 +4,13 @@ import SisMed.command.AtualizarConsultaCommand;
 import SisMed.command.CadastrarConsultaCommand;
 import SisMed.controller.ConsultasController;
 import SisMed.controller.RelatorioController;
+import SisMed.observer.EmailConsultaObserver;
+import SisMed.observer.EmailObserver;
+import SisMed.observer.MailNotifications;
 import SisMed.service.ConsultasService;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class MenuChoicesConsultas {
@@ -14,7 +18,9 @@ public class MenuChoicesConsultas {
     private ConsultasService consultasService;
     private RelatorioController relatorioController;
     private Scanner scanner = new Scanner(System.in);
+    MailNotifications sistema = new MailNotifications();
 
+    EmailObserver emailConsulta = new EmailConsultaObserver();
     public MenuChoicesConsultas(ConsultasController consultasController, RelatorioController relatorioController,
                                 ConsultasService consultasService) {
         this.consultasController = consultasController;
@@ -39,6 +45,7 @@ public class MenuChoicesConsultas {
 
         CadastrarConsultaCommand cadastrarConsultaCommand = new CadastrarConsultaCommand(consultasService, cpfPaciente, cpfMedico, dataConsulta, descricao);
         cadastrarConsultaCommand.execute();
+        sendMail(cpfPaciente.toString(), dataConsulta.toString());
     }
 
     public void listarConsultas() {
@@ -82,6 +89,14 @@ public class MenuChoicesConsultas {
 
     public void gerarRelatorioHtml(){
        relatorioController.relatorioHTML();
+    }
+
+    public void sendMail(String cpfPaciente, String dataConsulta){
+        sistema.adicionarObservador(emailConsulta);
+        ArrayList<String> list = new ArrayList<>();
+        list.add(cpfPaciente);
+        list.add(dataConsulta);
+        sistema.agendarConsulta(list);
     }
 
 }
