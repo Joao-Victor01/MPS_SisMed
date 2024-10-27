@@ -1,4 +1,4 @@
-package SisMed.adapter;
+package SisMed.padroes.adapter;
 
 public class OAuthService {
     public boolean authenticate(String email, String password) {

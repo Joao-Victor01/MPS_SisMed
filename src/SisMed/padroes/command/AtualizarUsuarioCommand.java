@@ -1,4 +1,4 @@
-package SisMed.command;
+package SisMed.padroes.command;
 
 import SisMed.service.UsuarioService;
 

@@ -1,6 +1,6 @@
 package SisMed.model;
 
-import SisMed.memento.UsuarioMemento;
+import SisMed.padroes.memento.UsuarioMemento;
 
 import java.time.LocalDate;
 
@@ -84,4 +84,5 @@ public abstract class Usuario {
         this.userName = memento.getUserName();
         this.senha = memento.getSenha();
     }
+
 }

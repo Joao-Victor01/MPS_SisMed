@@ -1,7 +1,7 @@
 package SisMed.repository;
 
 import SisMed.database.DatabaseConnectionManager;
-import SisMed.factory.UsuarioFactoryRegistry;
+import SisMed.padroes.factory.UsuarioFactoryRegistry;
 import SisMed.model.Admin;
 import SisMed.model.Medico;
 import SisMed.model.Paciente;
@@ -188,6 +188,40 @@ public class UsuarioRepository implements UsuarioRepositoryInterface{
             e.printStackTrace();
         }
         return usuarios;
+    }
+
+    @Override
+    public List<Usuario> listarPacientes() {
+        List<Usuario> pacientes = new ArrayList<>();
+        String sql = "SELECT * FROM Usuarios WHERE tipoUsuario = ?"; // Filtra para o tipo paciente
+
+        try (Connection connection = connectionManager.getConnection();
+             PreparedStatement pstmt = connection.prepareStatement(sql)) {
+
+            pstmt.setInt(1, 2); // Substitua '2' pelo valor correto que representa o tipo paciente
+
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                Paciente paciente = (Paciente) UsuarioFactoryRegistry.criarUsuario(rs.getInt("tipoUsuario"));
+
+                paciente.setNome(rs.getString("nome"));
+                paciente.setCpf(rs.getLong("cpf"));
+                paciente.setEndereco(rs.getString("endereco"));
+                paciente.setSexo(rs.getString("sexo"));
+                paciente.setDataNascimento(rs.getDate("dataNascimento").toLocalDate());
+                paciente.setUserName(rs.getString("userName"));
+                paciente.setSenha(rs.getString("senha"));
+
+                // Campos específicos do paciente
+                paciente.setFicha(rs.getString("ficha"));
+                paciente.setHistoricoMedico(rs.getString("historicoMedico"));
+
+                pacientes.add(paciente);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return pacientes;
     }
 
     private int obterTipoUsuario(Usuario usuario) {

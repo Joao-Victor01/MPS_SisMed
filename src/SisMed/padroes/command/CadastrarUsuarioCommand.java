@@ -1,9 +1,9 @@
-package SisMed.command;
+package SisMed.padroes.command;
 
 import SisMed.model.Usuario;
-import SisMed.observer.EmailCadastroObserver;
-import SisMed.observer.EmailObserver;
-import SisMed.observer.MailNotifications;
+import SisMed.padroes.observer.EmailCadastroObserver;
+import SisMed.padroes.observer.EmailObserver;
+import SisMed.padroes.observer.MailNotifications;
 import SisMed.service.UsuarioService;
 
 import java.util.ArrayList;

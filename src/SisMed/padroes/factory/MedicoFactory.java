@@ -1,4 +1,4 @@
-package SisMed.factory;
+package SisMed.padroes.factory;
 
 import SisMed.model.Medico;
 import SisMed.model.Usuario;

@@ -1,8 +1,8 @@
 package SisMed.menus;
 
-import SisMed.command.AtualizarUsuarioCommand;
-import SisMed.command.CadastrarUsuarioCommand;
-import SisMed.command.ListarUsuariosCommand;
+import SisMed.padroes.command.AtualizarUsuarioCommand;
+import SisMed.padroes.command.CadastrarUsuarioCommand;
+import SisMed.padroes.command.ListarUsuariosCommand;
 import SisMed.model.Admin;
 import SisMed.model.Medico;
 import SisMed.model.Paciente;

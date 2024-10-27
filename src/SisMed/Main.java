@@ -20,8 +20,8 @@ import SisMed.service.RelatorioService;
 import SisMed.service.UsuarioService;
 import SisMed.menus.MenuLoginEfetuado;
 import SisMed.view.MenuInicial;
-import SisMed.adapter.OAuthService;
-import SisMed.adapter.OAuthAdapter;
+import SisMed.padroes.adapter.OAuthService;
+import SisMed.padroes.adapter.OAuthAdapter;
 import org.h2.tools.Server;
 
 import java.sql.SQLException;

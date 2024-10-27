@@ -2,14 +2,12 @@ package SisMed.repository;
 
 import SisMed.database.DatabaseConnectionManager;
 import SisMed.model.Consultas;
-import SisMed.state.ConsultaAgendada;
-import SisMed.state.ConsultaConcluida;
+import SisMed.padroes.state.ConsultaAgendada;
 
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class ConsultasRepository implements ConsultasRepositoryInterface {
 

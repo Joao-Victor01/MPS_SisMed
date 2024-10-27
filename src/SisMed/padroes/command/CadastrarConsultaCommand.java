@@ -1,4 +1,4 @@
-package SisMed.command;
+package SisMed.padroes.command;
 
 import SisMed.model.Consultas;
 import SisMed.service.ConsultasService;

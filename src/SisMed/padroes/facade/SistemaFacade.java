@@ -1,6 +1,6 @@
-package SisMed.facade;
+package SisMed.padroes.facade;
 
-import SisMed.command.Command;
+import SisMed.padroes.command.Command;
 import java.util.ArrayList;
 import java.util.List;
 

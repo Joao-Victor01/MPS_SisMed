@@ -1,6 +1,7 @@
 package SisMed.service;
 
-import SisMed.memento.UsuarioMemento;
+import SisMed.model.Paciente;
+import SisMed.padroes.memento.UsuarioMemento;
 import SisMed.model.Usuario;
 import SisMed.repository.UsuarioRepositoryInterface;
 
@@ -33,6 +34,27 @@ public class UsuarioService {
             System.out.println("Nome: " + usuario.getNome());
             System.out.println("Tipo de usuário: " + usuario.getTipoUsuario());
             System.out.println("Data de nascimento: " + usuario.getDataNascimento());
+            System.out.println("-----------------------------------");
+        }
+
+        return usuarios;
+    }
+
+    public List<Usuario> listarPacientes() {
+        List<Usuario> usuarios = usuarioRepository.listarPacientes();
+
+        for (Usuario usuario : usuarios) {
+            System.out.println("Nome de usuário: " + usuario.getUserName());
+            System.out.println("Nome: " + usuario.getNome());
+            System.out.println("Tipo de usuário: " + usuario.getTipoUsuario());
+            System.out.println("Data de nascimento: " + usuario.getDataNascimento());
+            System.out.println("Sexo: " + usuario.getSexo());
+
+            if (usuario instanceof Paciente paciente) {
+                System.out.println("Ficha: " + paciente.getFicha());
+                System.out.println("Histórico Médico: " + paciente.getHistoricoMedico());
+            }
+
             System.out.println("-----------------------------------");
         }
 

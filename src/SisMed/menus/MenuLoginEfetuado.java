@@ -31,8 +31,26 @@ public class MenuLoginEfetuado {
 
     private void exibirMenuPorTipoUsuario(Usuario usuario) throws SQLException {
         if (usuario instanceof Medico) {
-            System.out.println("1. Visualizar agenda;");
-            // TODO: implementar opções do médico
+            System.out.println("1. Visualizar pacientes;");
+            System.out.println("2. Desmarcar consulta;");
+            System.out.println("2. Sair;");
+
+            int opcao = scanner.nextInt();
+            scanner.nextLine();
+
+            switch (opcao) {
+                case 1:
+                    usuarioService.listarPacientes();
+                    break;
+                case 2:
+                    menuChoicesConsultas.removerConsulta();
+                    break;
+                case 3:
+                    System.out.println("Saindo...");
+                    break;
+                default:
+                    System.out.println("Opção inválida, tente novamente.");
+            }
         } else if (usuario instanceof Paciente) {
             System.out.println("1. Marcar consulta;");
             System.out.println("2. Desmarcar consulta;");

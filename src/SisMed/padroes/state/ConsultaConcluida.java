@@ -1,4 +1,4 @@
-package SisMed.state;
+package SisMed.padroes.state;
 
 import SisMed.model.Consultas;
 

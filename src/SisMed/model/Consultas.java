@@ -1,9 +1,7 @@
 package SisMed.model;
 
-import SisMed.state.ConsultaAgendada;
-import SisMed.state.ConsultaCancelada;
-import SisMed.state.ConsultaConcluida;
-import SisMed.state.EstadoConsulta;
+import SisMed.padroes.state.ConsultaAgendada;
+import SisMed.padroes.state.EstadoConsulta;
 
 import java.time.LocalDate;
 

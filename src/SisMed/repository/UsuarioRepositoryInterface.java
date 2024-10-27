@@ -11,5 +11,6 @@ public interface UsuarioRepositoryInterface {
 
     boolean loginUsuario(String userName, String senha);
     List<Usuario> listarTodos();
+    List<Usuario> listarPacientes();
     Usuario filtrarUsuarioPorUserName(String userName);
 }

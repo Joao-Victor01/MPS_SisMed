@@ -1,4 +1,4 @@
-package SisMed.adapter;
+package SisMed.padroes.adapter;
 
 import SisMed.login.LoginStrategy;
 

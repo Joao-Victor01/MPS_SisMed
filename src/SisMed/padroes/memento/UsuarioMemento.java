@@ -1,4 +1,4 @@
-package SisMed.memento;
+package SisMed.padroes.memento;
 
 import SisMed.model.Usuario;
 

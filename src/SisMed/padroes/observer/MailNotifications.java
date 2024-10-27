@@ -1,4 +1,4 @@
-package SisMed.observer;
+package SisMed.padroes.observer;
 
 import java.util.ArrayList;
 import java.util.List;

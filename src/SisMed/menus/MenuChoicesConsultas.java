@@ -1,12 +1,12 @@
 package SisMed.menus;
 
-import SisMed.command.AtualizarConsultaCommand;
-import SisMed.command.CadastrarConsultaCommand;
+import SisMed.padroes.command.AtualizarConsultaCommand;
+import SisMed.padroes.command.CadastrarConsultaCommand;
 import SisMed.controller.ConsultasController;
 import SisMed.controller.RelatorioController;
-import SisMed.observer.EmailConsultaObserver;
-import SisMed.observer.EmailObserver;
-import SisMed.observer.MailNotifications;
+import SisMed.padroes.observer.EmailConsultaObserver;
+import SisMed.padroes.observer.EmailObserver;
+import SisMed.padroes.observer.MailNotifications;
 import SisMed.service.ConsultasService;
 
 import java.time.LocalDate;
