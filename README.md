@@ -45,6 +45,12 @@ Abaixo está o diagrama de classe do sistema, que ilustra a estrutura das princi
 
 ![Diagrama de Classe](./src/main/resources/com/SisMed/diagrama-de-classes-v2.png)
 
+
+## Diagrama de caso de uso
+![Diagrama de Casos de uso](./src/main/resources/com/SisMed/Diagrama-de-Casos-de-Uso.jpeg)
+
+Link: [Diagrama de Casos de uso](https://lucid.app/lucidchart/22829de2-9578-4483-8ba0-51b887192379/edit?invitationId=inv_7640e7d5-baea-4227-b23c-2bcb547a9390&page=0_0#)
+
 ## Estrutura do Projeto
 
 ### Model
