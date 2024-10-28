@@ -41,7 +41,7 @@ Este projeto é um sistema para o cadastro e gerenciamento de consultas médicas
 
 Abaixo está o diagrama de classe do sistema, que ilustra a estrutura das principais classes e suas interações:
 
-![Diagrama de Classe](./src/Resources/diagrama-de-classe.PNG)
+![Diagrama de Classe](./src/main/resources/com/SisMed/diagrama-de-classe.PNG)
 
 ## Estrutura do Projeto
 
