@@ -45,6 +45,25 @@ Abaixo está o diagrama de classe do sistema, que ilustra a estrutura das princi
 
 ![Diagrama de Classe](./src/main/resources/com/SisMed/diagrama-de-classes-v2.png)
 
+Legenda:  
+
+🟩 Padrão Factory: Verde
+
+⬜ Padrão Command: Cinza
+
+🟦 Padrão State: Azul
+
+🟨 Padrão strategy: Amarelo Queimado 
+
+🟧 Padrão Adapter: Laranja claro 
+
+🟪 Padrão Faceda: Roxo  
+
+🟫 Padrão Template: Marron 
+
+🟥 Padrão Memento: Vermelho Claro
+
+🟦 Padrão Observer : Azul Claro
 
 ## Diagrama de caso de uso
 ![Diagrama de Casos de uso](./src/main/resources/com/SisMed/Diagrama-de-Casos-de-Uso.jpeg)
