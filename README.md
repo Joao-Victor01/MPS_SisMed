@@ -39,9 +39,11 @@ Este projeto é um sistema para o cadastro e gerenciamento de consultas médicas
 
 ## Diagrama de Classe
 
+Link: [Diagrama de classes](https://lucid.app/lucidchart/757dbade-57ec-4a03-9d87-39c825c5184f/edit?viewport_loc=-6294%2C602%2C2188%2C986%2C0_0&invitationId=inv_0b8bfc8d-1396-4c89-b2d1-b71cde1d430d)
+
 Abaixo está o diagrama de classe do sistema, que ilustra a estrutura das principais classes e suas interações:
 
-![Diagrama de Classe](./src/main/resources/com/SisMed/diagrama-de-classe.PNG)
+![Diagrama de Classe](./src/main/resources/com/SisMed/diagrama-de-classes-v2.png)
 
 ## Estrutura do Projeto
 
